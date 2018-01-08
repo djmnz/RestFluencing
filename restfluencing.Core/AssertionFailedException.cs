@@ -28,7 +28,7 @@ namespace restfluencing
 			Result = result;
 		}
 
-		public static string GetFullMessage(ExecutionResult result)
+		internal static string GetFullMessage(ExecutionResult result)
 		{
 			var msg = new StringBuilder();
 
@@ -77,7 +77,7 @@ namespace restfluencing
 			return msg.ToString();
 		}
 
-		public static string GetErrorMessage(IEnumerable<AssertionResult> results)
+		internal static string GetErrorMessage(IEnumerable<AssertionResult> results)
 		{
 			var error = new StringBuilder();
 			foreach (var r in results)
@@ -86,7 +86,6 @@ namespace restfluencing
 			}
 			return error.ToString();
 		}
-
 
 	}
 }

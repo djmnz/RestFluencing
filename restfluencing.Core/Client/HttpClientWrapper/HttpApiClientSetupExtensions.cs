@@ -1,13 +1,13 @@
 namespace restfluencing.Client.HttpApiClient
 {
-	public static class HttpApiClientSetup
+	public static class HttpApiClientSetupExtensions
 	{
-		public static RestDefaults UsingWebApi(this RestDefaults request)
+		public static RestConfiguration UsingWebApi(this RestConfiguration request)
 		{
 			request.ClientFactory = new HttpApiClientBuilder();
 			return request;
 		}
-		public static RestDefaults UseJsonResponseDeserialiser(this RestDefaults request)
+		public static RestConfiguration UseJsonResponseDeserialiser(this RestConfiguration request)
 		{
 			request.ResponseDeserialiser = new JsonResponseDeserialiser();
 			return request;

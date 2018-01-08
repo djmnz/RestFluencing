@@ -10,7 +10,7 @@ namespace resfluencing.Tests
 	[TestClass]
 	public class ReturnsDataRule
 	{
-		private RestDefaults _default = null;
+		private RestConfiguration _configuration = null;
 		private TestApiFactory _factory = null;
 
 
@@ -18,9 +18,9 @@ namespace resfluencing.Tests
 		public void Setup()
 		{
 			// Setup Defaults
-			var restDefaults = RestDefaults.JsonDefault();
+			var restDefaults = RestConfiguration.JsonDefault();
 			restDefaults.WithBaseUrl("http://test.starnow.local/");
-			_default = restDefaults;
+			_configuration = restDefaults;
 
 			// Setup Factory
 			var factory = Factories.Default();
@@ -41,51 +41,47 @@ namespace resfluencing.Tests
 			_factory.Responses.Add("/product/3", model);
 
 
-			Rest.Get("/product/3", _default)
-				.Response(a => a
-					.ReturnsData(model)
-				)
+			Rest.Get("/product/3", _configuration)
+				.Response(true)
+				.ReturnsData(model)
 				.Execute()
 				.ShouldPass();
 		}
         [TestMethod]
         public void WhenDynamic_AndMatchesProperty_ShouldPass()
         {
-            Rest.Get("/product/1", _default)
-                .Response(a => a
-                    .ReturnsData(new
-                    {
-                        Name = "Apple"
-                    })
-                )
+            Rest.Get("/product/1", _configuration)
+                .Response(true)
+                .ReturnsData(new
+                {
+                    Name = "Apple"
+                })
 	            .Execute()
                 .ShouldPass();
         }
         [TestMethod]
         public void WhenDynamic_AndMatchesProperty_AndMismatchOther_ShouldFail()
         {
-            Rest.Get("/product/1", _default)
-                .Response(a => a
-                    .ReturnsData(new
-                    {
-                        Name = "Apple",
-                        Price = 1.241
-                    })
-                )
+            Rest.Get("/product/1", _configuration)
+                .Response(true)
+                .ReturnsData(new
+                {
+                    Name = "Apple",
+                    Price = 1.241
+                })
 	            .Execute()
                 .ShouldFail();
         }
         [TestMethod]
         public void WhenDynamic_AndPropertyIsArray_AndMatch_ShouldFPass()
         {
-            Rest.Get("/product/1", _default)
-                .Response(a => a
-                    .ReturnsData(new
-                    {
-                        Name = "Apple",
-                        Price = 1.241
-                    })
-                )
+            Rest.Get("/product/1", _configuration)
+                .Response(true)
+                .ReturnsData(new
+                {
+                    Name = "Apple",
+                    Price = 1.241
+                })
 	            .Execute()
                 .ShouldFail();
         }
@@ -93,13 +89,12 @@ namespace resfluencing.Tests
         [TestMethod]
 		public void WhenTyped_AndHasIncompleteData_ShouldFailAsItReturnsAllData()
 		{
-			Rest.Get("/product/1", _default)
-				.Response(a => a
-					.ReturnsData(new Product()
-					{
-						Name = "Melon"
-					})
-				)
+			Rest.Get("/product/1", _configuration)
+				.Response(true)
+				.ReturnsData(new Product()
+				{
+					Name = "Melon"
+				})
 				.Execute()
 				.ShouldFailForRule<JsonModelAssertionRule>();
 		}
@@ -107,13 +102,12 @@ namespace resfluencing.Tests
 		[TestMethod]
 		public void WhenDynamic_AndDifferentPropertyValue_AndHasIncompleteModel_ShouldFail()
 		{
-			Rest.Get("/product/1", _default)
-				.Response(a => a
-					.ReturnsData(new 
-					{
-						Name = "Melon"
-					})
-				)
+			Rest.Get("/product/1", _configuration)
+				.Response(true)
+				.ReturnsData(new 
+				{
+					Name = "Melon"
+				})
 				.Execute()
 				.ShouldFailForRule<JsonModelAssertionRule>();
 		}
@@ -121,13 +115,12 @@ namespace resfluencing.Tests
 		[TestMethod]
 		public void WhenTyped_AndPropertiesAndModelIsDifferent_ShouldFail()
 		{
-			Rest.Get("/product/1", _default)
-				.Response(a => a
-					.ReturnsData(new Promo()
-					{
-						Discount = 124
-					})
-				)
+			Rest.Get("/product/1", _configuration)
+				.Response(true)
+				.ReturnsData(new Promo()
+				{
+					Discount = 124
+				})
 				.Execute()
 				.ShouldFailForRule<JsonModelAssertionRule>();
 		}

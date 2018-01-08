@@ -23,7 +23,7 @@ namespace resfluencing.Tests
 			};
 
 
-			var melonproduct = new Product()
+			var melonProduct = new Product()
 			{
 				Name = "Melon",
 				ExpiryDateTime = new DateTime(2017, 1, 23, 10, 23, 55, DateTimeKind.Utc),
@@ -35,13 +35,13 @@ namespace resfluencing.Tests
 
 		    var melonPromo = new Promo()
 		    {
-		        Product = melonproduct,
+		        Product = melonProduct,
 		        Discount = 33.45
 		    };
 
 		    var applePromo = new Promo()
 		    {
-		        Product = melonproduct,
+		        Product = melonProduct,
 		        Discount = 33.45
 		    };
 
@@ -58,7 +58,7 @@ namespace resfluencing.Tests
 
 			factory.Responses.Add("/product", new List<Product>
 			{
-				melonproduct,
+				melonProduct,
 				appleProduct
 			});
 

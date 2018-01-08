@@ -8,7 +8,7 @@ namespace restfluencing
 {
 	public class ExecutionResult
 	{
-		public IEnumerable<AssertionResult> Results { get; set; }
+		public List<AssertionResult> Results { get; set; }
 		public IApiClientResponse Response { get; set; }
 
 		/// <summary>

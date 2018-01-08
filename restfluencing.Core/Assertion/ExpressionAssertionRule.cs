@@ -54,7 +54,12 @@ namespace restfluencing.Assertion
 			{
 				result = new AssertionResult(this, ex.ToString());
 			}
-			yield return result;
+
+			if (result != null)
+			{
+				yield return result;
+			}
+			yield break;
 
 		}
 

@@ -14,7 +14,7 @@ namespace resfluencing.Tests
     [TestClass]
     public class ExpressionAssertionRule
     {
-        private RestDefaults _default = null;
+        private RestConfiguration _configuration = null;
         private TestApiFactory _factory = null;
 
 
@@ -22,9 +22,9 @@ namespace resfluencing.Tests
         public void Setup()
         {
             // Setup Defaults
-            var restDefaults = RestDefaults.JsonDefault();
+            var restDefaults = RestConfiguration.JsonDefault();
             restDefaults.WithBaseUrl("http://test.starnow.local/");
-            _default = restDefaults;
+            _configuration = restDefaults;
 
             // Setup Factory
             var factory = Factories.Default();
@@ -35,21 +35,19 @@ namespace resfluencing.Tests
         [TestMethod]
         public void WhenProperty_Equals_ShouldPass()
         {
-            Rest.Get("/product/2", _default)
-                .Response(a => a
-                    .Returns<Product>(x => x.Name == "Apple")
-                )
-				.Execute()
-                .ShouldPass();
+            Rest.Get("/product/1", _configuration)
+                .Response(true)
+	            .Returns<Product>(x => x.Name == "Apple")
+                .Execute()
+				.ShouldPass();
         }
 
         [TestMethod]
         public void WhenProperty_NotEquals_ShouldFail()
         {
-            Rest.Get("/product/1", _default)
-                .Response(a => a
-                    .Returns<Product>(x => x.Name == "Fail test")
-                )
+            Rest.Get("/product/1", _configuration)
+                .Response(true)
+				.Returns<Product>(x => x.Name == "Fail test")
 	            .Execute()
                 .ShouldFail();
         }
@@ -57,10 +55,9 @@ namespace resfluencing.Tests
         [TestMethod]
         public void WhenType_DoesNotMatch_ShouldFail()
         {
-            Rest.Get("/product/1", _default)
-                .Response(a => a
-                    .Returns<Promo>(x => x.Discount > 0)
-                )
+            Rest.Get("/product/1", _configuration)
+                .Response(true)
+	            .Returns<Promo>(x => x.Discount > 0)
 	            .Execute()
                 .ShouldFail();
         }
