@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using restfluencing.Assertion.Rules;
-using restfluencing.Assertion.Rules.Json;
 
 namespace restfluencing.Assertion
 {
@@ -40,19 +39,6 @@ namespace restfluencing.Assertion
 		public static RestResponse Returns<T>(this RestResponse builder, Func<T, bool> expression)
 		{
 			builder.AddRule(new ExpressionAssertionRule<T>(expression));
-			return builder;
-		}
-
-		public static RestResponse ReturnsData(this RestResponse builder, object model)
-		{
-			builder.AddRule(new JsonModelAssertionRule(model));
-			return builder;
-		}
-
-		public static RestResponse HasJsonSchema<T>(this RestResponse builder)
-		{
-			var schemaRule = new JsonModelSchemaAssertionRule<T>();
-			builder.AddRule(schemaRule);
 			return builder;
 		}
 	}

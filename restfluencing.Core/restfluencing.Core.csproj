@@ -31,12 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json.Schema, Version=2.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.Schema.2.0.9\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -61,9 +56,6 @@
     <Compile Include="Assertion\Rules\AssertionRule.cs" />
     <Compile Include="Assertion\Rules\HeaderRule.cs" />
     <Compile Include="Assertion\Rules\HttpStatusRule.cs" />
-    <Compile Include="Assertion\Rules\Json\JsonModelAssertionRule.cs" />
-    <Compile Include="Assertion\Rules\Json\JsonModelSchemaAssertionRule.cs" />
-    <Compile Include="Assertion\Rules\Json\JsonSchemaProvider.cs" />
     <Compile Include="Assertion\Rules\MetaProvider.cs" />
     <Compile Include="Assertion\Rules\ObjectMeta.cs" />
     <Compile Include="Assertion\Rules\TypeExtensions.cs" />

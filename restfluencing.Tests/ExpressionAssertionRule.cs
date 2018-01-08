@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using resfluencing.Tests.Clients;
-using resfluencing.Tests.Models;
+using restfluencing.Tests.Clients;
+using restfluencing.Tests.Models;
 using restfluencing;
 using restfluencing.Assertion;
 
-namespace resfluencing.Tests
+namespace restfluencing.Tests
 {
     [TestClass]
     public class ExpressionAssertionRule

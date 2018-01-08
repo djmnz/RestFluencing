@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
-using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using resfluencing.Tests.Clients;
-using resfluencing.Tests.Models;
+using restfluencing.Tests.Clients;
+using restfluencing.Tests.Models;
 using restfluencing;
-using restfluencing.Assertion;
-using restfluencing.Assertion.Rules.Json;
+using restfluencing.JsonSchema;
 
-namespace resfluencing.Tests
+namespace restfluencing.Tests
 {
 	[TestClass]
 	public class HasJsonSchemaRule

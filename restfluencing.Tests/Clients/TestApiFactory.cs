@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using restfluencing.Client;
 
-namespace resfluencing.Tests.Clients
+namespace restfluencing.Tests.Clients
 {
 	public class TestApiFactory : IClientBuilder
 	{

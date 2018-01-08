@@ -6,8 +6,8 @@
     <ProjectGuid>{78FD63D0-269B-4800-81FA-5E5AFFBFF8AD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>resfluencing.Tests</RootNamespace>
-    <AssemblyName>resfluencing.Tests</AssemblyName>
+    <RootNamespace>restfluencing.Tests</RootNamespace>
+    <AssemblyName>restfluencing.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -44,8 +44,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json.Schema, Version=2.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.Schema.2.0.9\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>
@@ -76,12 +75,15 @@
     <Compile Include="Models\Promo.cs" />
     <Compile Include="HasJsonSchemaRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReturnsDataRule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\restfluencing.Core\restfluencing.Core.csproj">
       <Project>{BB44CC46-AAB8-4F0E-94FB-1A6B27EA3AAB}</Project>
       <Name>restfluencing.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\restfluencing.JsonSchema\restfluencing.JsonSchema.csproj">
+      <Project>{6fee443f-daf2-4726-885d-318a8ecdf7c1}</Project>
+      <Name>restfluencing.JsonSchema</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
