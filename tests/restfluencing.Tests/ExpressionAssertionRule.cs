@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using restfluencing.Tests.Clients;
 using restfluencing.Tests.Models;
-using restfluencing;
 using restfluencing.Assertion;
 
 namespace restfluencing.Tests
 {
-    [TestClass]
+	[TestClass]
     public class ExpressionAssertionRule
     {
         private RestConfiguration _configuration = null;
@@ -32,17 +26,37 @@ namespace restfluencing.Tests
             _factory = factory as TestApiFactory;
         }
 
-        [TestMethod]
-        public void WhenProperty_Equals_ShouldPass()
-        {
-            Rest.Get("/product/1", _configuration)
-                .Response(true)
-	            .Returns<Product>(x => x.Name == "Apple")
-                .Execute()
-				.ShouldPass();
-        }
+	    [TestMethod]
+	    public void WhenProperty_Equals_ShouldPass()
+	    {
+		    Rest.Get("/product/1", _configuration)
+			    .Response(true)
+			    .Returns<Product>(x => x.Name == "Apple")
+			    .Execute()
+			    .ShouldPass();
+	    }
 
-        [TestMethod]
+	    [TestMethod]
+	    public void WhenDynamicProperty_Equals_ShouldPass()
+	    {
+		    Rest.Get("/product/1", _configuration)
+			    .Response(true)
+			    .Returns<dynamic>(x => x.Name == "Apple")
+			    .Execute()
+			    .ShouldPass();
+	    }
+
+	    [TestMethod]
+	    public void WhenDynamicProperty_NotEquals_ShouldFail()
+	    {
+		    Rest.Get("/product/1", _configuration)
+			    .Response(true)
+			    .Returns<dynamic>(x => x.Name == "NotApple")
+			    .Execute()
+			    .ShouldFail();
+	    }
+
+		[TestMethod]
         public void WhenProperty_NotEquals_ShouldFail()
         {
             Rest.Get("/product/1", _configuration)

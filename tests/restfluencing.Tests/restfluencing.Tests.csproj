@@ -43,12 +43,12 @@
       <HintPath>..\packages\FluentAssertions.4.19.2\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json.Schema, Version=2.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.Schema.2.0.9\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\Newtonsoft.Json.Schema.2.0.9\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -77,11 +77,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\restfluencing.Core\restfluencing.Core.csproj">
+    <ProjectReference Include="..\..\src\restfluencing.Core\restfluencing.Core.csproj">
       <Project>{BB44CC46-AAB8-4F0E-94FB-1A6B27EA3AAB}</Project>
       <Name>restfluencing.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\restfluencing.JsonSchema\restfluencing.JsonSchema.csproj">
+    <ProjectReference Include="..\..\src\restfluencing.JsonSchema\restfluencing.JsonSchema.csproj">
       <Project>{6fee443f-daf2-4726-885d-318a8ecdf7c1}</Project>
       <Name>restfluencing.JsonSchema</Name>
     </ProjectReference>
