@@ -66,7 +66,7 @@ namespace restfluencing
 			};
 
 			//TODO this may need to move out if we want to make the httpclient library an optional dependency to help with other .net implementations (i.e. core, phone, etc)
-			restDefaults.UsingWebApi();
+			restDefaults.UsingWebApiClient();
 
 			restDefaults.UseJsonResponseDeserialiser();
 

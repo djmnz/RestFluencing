@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>restfluencing</RootNamespace>
-    <AssemblyName>restfluencing.Core</AssemblyName>
+    <AssemblyName>restfluencing</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,13 +45,12 @@
   <ItemGroup>
     <Compile Include="AssertionFailedException.cs" />
     <Compile Include="AssertionsExtensions.cs" />
-    <Compile Include="Assertion\AssertionBuilder.cs" />
     <Compile Include="Assertion\RestResponseAssertionSetupExtensions.cs" />
     <Compile Include="Assertion\AssertionContext.cs" />
     <Compile Include="Assertion\AssertionResult.cs" />
     <Compile Include="Assertion\ConsoleAssertion.cs" />
     <Compile Include="Assertion\ExceptionAssertion.cs" />
-    <Compile Include="Assertion\ExpressionAssertionRule.cs" />
+    <Compile Include="Assertion\Rules\ExpressionAssertionRule.cs" />
     <Compile Include="Assertion\IAssertion.cs" />
     <Compile Include="Assertion\Rules\AssertionRule.cs" />
     <Compile Include="Assertion\Rules\HeaderRule.cs" />
@@ -63,13 +62,13 @@
     <Compile Include="Client\HttpClientWrapper\HttpApiClientBuilder.cs" />
     <Compile Include="Client\HttpClientWrapper\HttpApiClientSetupExtensions.cs" />
     <Compile Include="Client\HttpClientWrapper\HttpClient.cs" />
-    <Compile Include="Client\HttpClientWrapper\RestConfigurationSetupExtensions.cs" />
     <Compile Include="Client\IApiClient.cs" />
     <Compile Include="Client\IApiClientOptions.cs" />
     <Compile Include="Client\IApiClientRequest.cs" />
     <Compile Include="Client\IApiClientResponse.cs" />
     <Compile Include="Client\IClientBuilder.cs" />
     <Compile Include="Client\IResponseDeserialiser.cs" />
+    <Compile Include="Client\JsonResponseDeserialiser.cs" />
     <Compile Include="ExecutionResult.cs" />
     <Compile Include="Helpers\ConcurrencyExtensions.cs" />
     <Compile Include="Helpers\ErrorMessages.cs" />
@@ -79,6 +78,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rest.cs" />
     <Compile Include="RestConfiguration.cs" />
+    <Compile Include="RestConfigurationSetupExtensions.cs" />
     <Compile Include="RestRequest.cs" />
     <Compile Include="RestRequestSetupExtensions.cs" />
     <Compile Include="RestResponse.cs" />

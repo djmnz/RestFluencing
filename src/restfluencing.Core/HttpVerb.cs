@@ -1,5 +1,8 @@
 namespace restfluencing
 {
+	/// <summary>
+	/// Http verb
+	/// </summary>
 	public enum HttpVerb
 	{
 		Unknown = -1,

@@ -8,12 +8,6 @@ namespace restfluencing
 {
 	public static class RestRequestSetupExtensions
 	{
-		public static RestRequest UseJsonDeserialiser(this RestRequest request)
-		{
-			request.ResponseDeserialiser = new JsonResponseDeserialiser();
-			return request;
-		}
-
 		public static RestRequest WithHeader(this RestRequest request, string key, string value, bool overrideExisting = true)
 		{
 			var headers = request.Request.Headers;

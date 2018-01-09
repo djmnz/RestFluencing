@@ -2,6 +2,9 @@ using restfluencing.Assertion.Rules;
 
 namespace restfluencing.Assertion
 {
+	/// <summary>
+	/// Details of an assertion failure.
+	/// </summary>
 	public class AssertionResult
 	{
 

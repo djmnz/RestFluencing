@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
-using restfluencing.Assertion.Rules;
 
-namespace restfluencing.Assertion
+namespace restfluencing.Assertion.Rules
 {
+	/// <summary>
+	/// Standard assertion rule that uses the Deserialiser to compare the expression to the respone.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public class ExpressionAssertionRule<T> : AssertionRule
 	{
 		private const string _defaultError = @"Expression {0} is not found";

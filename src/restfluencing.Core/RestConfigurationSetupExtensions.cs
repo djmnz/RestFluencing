@@ -1,6 +1,6 @@
 using restfluencing.Assertion;
 
-namespace restfluencing.Client.HttpApiClient
+namespace restfluencing
 {
 	public static class RestConfigurationSetupExtensions
 	{
@@ -14,6 +14,12 @@ namespace restfluencing.Client.HttpApiClient
 		public static RestConfiguration WithConsoleAssertion(this RestConfiguration request)
 		{
 			request.Assertion = new ConsoleAssertion();
+			return request;
+		}
+
+		public static RestConfiguration WithJsonDeserialiser(this RestConfiguration request)
+		{
+			request.Assertion = new ExceptionAssertion();
 			return request;
 		}
 

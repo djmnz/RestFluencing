@@ -6,6 +6,9 @@ using System.Text;
 
 namespace restfluencing
 {
+	/// <summary>
+	/// Exception raised when an Assertion rule failed.
+	/// </summary>
 	public class AssertionFailedException : Exception
 	{
 		public ExecutionResult Result { get; }

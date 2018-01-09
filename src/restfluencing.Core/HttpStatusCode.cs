@@ -1,5 +1,8 @@
 ﻿namespace restfluencing
 {
+	/// <summary>
+	/// Available status codes. (note: this is a copy and paste of Microsoft definition)
+	/// </summary>
 	public enum HttpStatusCode
 	{
 		Continue = 100,

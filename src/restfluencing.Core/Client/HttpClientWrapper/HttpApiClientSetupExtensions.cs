@@ -1,16 +1,30 @@
+using Newtonsoft.Json.Linq;
+
 namespace restfluencing.Client.HttpApiClient
 {
 	public static class HttpApiClientSetupExtensions
 	{
-		public static RestConfiguration UsingWebApi(this RestConfiguration request)
+		/// <summary>
+		/// Uses the standard HttpApiClient wrapper as the web client
+		/// </summary>
+		/// <param name="config">Configuration to apply to</param>
+		/// <returns></returns>
+		public static RestConfiguration UsingWebApiClient(this RestConfiguration config)
 		{
-			request.ClientFactory = new HttpApiClientBuilder();
-			return request;
+			config.ClientFactory = new HttpApiClientBuilder();
+			return config;
 		}
-		public static RestConfiguration UseJsonResponseDeserialiser(this RestConfiguration request)
+
+		/// <summary>
+		/// Uses the JsonResponseDeserialiser to process the response.
+		/// </summary>
+		/// <param name="config">Configuration to apply to</param>
+		/// <param name="loadSettings">Deserialiser settings to use (null for default)</param>
+		/// <returns></returns>
+		public static RestConfiguration UseJsonResponseDeserialiser(this RestConfiguration config, JsonLoadSettings loadSettings = null)
 		{
-			request.ResponseDeserialiser = new JsonResponseDeserialiser();
-			return request;
+			config.ResponseDeserialiser = new JsonResponseDeserialiser(loadSettings);
+			return config;
 		}
 	}
 }

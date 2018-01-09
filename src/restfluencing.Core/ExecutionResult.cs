@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace restfluencing
 {
+	/// <summary>
+	/// Results of processing the Response's rules.
+	/// </summary>
 	public class ExecutionResult
 	{
 		public List<AssertionResult> Results { get; set; }
