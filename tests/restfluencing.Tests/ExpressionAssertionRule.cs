@@ -6,7 +6,7 @@ using restfluencing.Assertion;
 namespace restfluencing.Tests
 {
 	[TestClass]
-    public class ExpressionAssertionRule
+    public class ExpressionAssertionRuleTests
     {
         private RestConfiguration _configuration = null;
         private TestApiFactory _factory = null;
@@ -29,7 +29,7 @@ namespace restfluencing.Tests
 	    [TestMethod]
 	    public void WhenProperty_Equals_ShouldPass()
 	    {
-		    Rest.Get("/product/1", _configuration)
+		    Rest.Get("/product/apple", _configuration)
 			    .Response(true)
 			    .Returns<Product>(x => x.Name == "Apple")
 			    .Execute()
@@ -39,9 +39,9 @@ namespace restfluencing.Tests
 	    [TestMethod]
 	    public void WhenDynamicProperty_Equals_ShouldPass()
 	    {
-		    Rest.Get("/product/1", _configuration)
+		    Rest.Get("/product/apple", _configuration)
 			    .Response(true)
-			    .Returns<dynamic>(x => x.Name == "Apple")
+			    .Returns<Product>(x => x.Name == "Apple")
 			    .Execute()
 			    .ShouldPass();
 	    }
@@ -49,9 +49,9 @@ namespace restfluencing.Tests
 	    [TestMethod]
 	    public void WhenDynamicProperty_NotEquals_ShouldFail()
 	    {
-		    Rest.Get("/product/1", _configuration)
+		    Rest.Get("/product/apple", _configuration)
 			    .Response(true)
-			    .Returns<dynamic>(x => x.Name == "NotApple")
+			    .Returns<Product>(x => x.Name == "NotApple")
 			    .Execute()
 			    .ShouldFail();
 	    }
@@ -59,7 +59,7 @@ namespace restfluencing.Tests
 		[TestMethod]
         public void WhenProperty_NotEquals_ShouldFail()
         {
-            Rest.Get("/product/1", _configuration)
+            Rest.Get("/product/apple", _configuration)
                 .Response(true)
 				.Returns<Product>(x => x.Name == "Fail test")
 	            .Execute()
@@ -69,7 +69,7 @@ namespace restfluencing.Tests
         [TestMethod]
         public void WhenType_DoesNotMatch_ShouldFail()
         {
-            Rest.Get("/product/1", _configuration)
+            Rest.Get("/product/apple", _configuration)
                 .Response(true)
 	            .Returns<Promo>(x => x.Discount > 0)
 	            .Execute()

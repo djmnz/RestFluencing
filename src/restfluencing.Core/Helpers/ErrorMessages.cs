@@ -12,10 +12,7 @@ namespace restfluencing.Helpers
 
 		public const string NoAssertion =
 			"The Assertion has not been set. Please set the assertion on the Configuration or Request object.";
-	}
-
-	internal static class DefaultValues
-	{
-		public static readonly int TimeOutInSeconds = 30;
+		public const string BaseUrlIsNotSet =
+			"Relative url requests are only available if you set the Configuration.BaseUrl";
 	}
 }

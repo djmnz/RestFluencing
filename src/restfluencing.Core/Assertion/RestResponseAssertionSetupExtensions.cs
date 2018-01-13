@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using Newtonsoft.Json.Linq;
 using restfluencing.Assertion.Rules;
 
 namespace restfluencing.Assertion
@@ -30,16 +33,45 @@ namespace restfluencing.Assertion
 			return builder;
 		}
 
-		public static RestResponse Returns<T>(this RestResponse builder, Func<T, bool> expression, string error)
+		public static RestResponse Returns<T>(this RestResponse builder, Expression<Func<T, bool>> expression, string error)
 		{
 			builder.AddRule(new ExpressionAssertionRule<T>(expression, error));
 			return builder;
 		}
 
-		public static RestResponse Returns<T>(this RestResponse builder, Func<T, bool> expression)
+		public static RestResponse Returns(this RestResponse builder, Func<dynamic, bool> expression, string error)
+		{
+			builder.AddRule(new DynamicExpressionAssertionRule(expression, error));
+			return builder;
+		}
+
+		public static RestResponse Returns<T>(this RestResponse builder, Expression<Func<T, bool>> expression)
 		{
 			builder.AddRule(new ExpressionAssertionRule<T>(expression));
 			return builder;
 		}
+
+		public static RestResponse IsEmpty(this RestResponse builder, string error)
+		{
+			builder.AddRule(new BlankResponseAssertionRule(error));
+			return builder;
+		}
+
+		public static RestResponse IsEmpty(this RestResponse builder)
+		{
+			return builder.IsEmpty(null);
+		}
+
+		public static RestResponse IsNotEmpty(this RestResponse builder, string error)
+		{
+			builder.AddRule(new NotBlankResponseAssertionRule(error));
+			return builder;
+		}
+
+		public static RestResponse IsNotEmpty(this RestResponse builder)
+		{
+			return builder.IsNotEmpty(null);
+		}
+
 	}
 }

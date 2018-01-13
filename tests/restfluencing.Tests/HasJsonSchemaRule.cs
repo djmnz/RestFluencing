@@ -8,7 +8,7 @@ using restfluencing.JsonSchema;
 namespace restfluencing.Tests
 {
 	[TestClass]
-	public class HasJsonSchemaRule
+	public class HasJsonSchemaRuleTests
 	{
 		private RestConfiguration _configuration = null;
 		private TestApiFactory _factory = null;
@@ -31,7 +31,7 @@ namespace restfluencing.Tests
 		[TestMethod]
 		public void SuccessProductModel()
 		{
-			Rest.Get("/product/1", _configuration)
+			Rest.Get("/product/apple", _configuration)
 				.Response(true)
 				.HasJsonSchema<Product>()
 				.Execute()
@@ -41,7 +41,7 @@ namespace restfluencing.Tests
 		[TestMethod]
 		public void SuccessPromoModel()
 		{
-			Rest.Get("/promo/1", _configuration)
+			Rest.Get("/promo/apple", _configuration)
 				.Response(true)
 				.HasJsonSchema<Promo>()
 				.Execute()

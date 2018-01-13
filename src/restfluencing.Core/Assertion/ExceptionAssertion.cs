@@ -7,7 +7,7 @@
 	{
 		public void Assert(ExecutionResult result)
 		{
-			result.Assert();
+			throw new AssertionFailedException(result);
 		}
 	}
 }

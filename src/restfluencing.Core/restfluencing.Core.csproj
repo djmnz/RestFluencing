@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,14 +51,13 @@
     <Compile Include="Assertion\AssertionResult.cs" />
     <Compile Include="Assertion\ConsoleAssertion.cs" />
     <Compile Include="Assertion\ExceptionAssertion.cs" />
+    <Compile Include="Assertion\Rules\BlankResponseAssertionRule.cs" />
     <Compile Include="Assertion\Rules\ExpressionAssertionRule.cs" />
     <Compile Include="Assertion\IAssertion.cs" />
     <Compile Include="Assertion\Rules\AssertionRule.cs" />
     <Compile Include="Assertion\Rules\HeaderRule.cs" />
     <Compile Include="Assertion\Rules\HttpStatusRule.cs" />
-    <Compile Include="Assertion\Rules\MetaProvider.cs" />
-    <Compile Include="Assertion\Rules\ObjectMeta.cs" />
-    <Compile Include="Assertion\Rules\TypeExtensions.cs" />
+    <Compile Include="Assertion\Rules\NotBlankResponseAssertionRule.cs" />
     <Compile Include="Client\ApiClientRequest.cs" />
     <Compile Include="Client\HttpClientWrapper\HttpApiClientBuilder.cs" />
     <Compile Include="Client\HttpClientWrapper\HttpApiClientSetupExtensions.cs" />
@@ -71,8 +71,8 @@
     <Compile Include="Client\JsonResponseDeserialiser.cs" />
     <Compile Include="ExecutionResult.cs" />
     <Compile Include="Helpers\ConcurrencyExtensions.cs" />
+    <Compile Include="Helpers\DefaultValues.cs" />
     <Compile Include="Helpers\ErrorMessages.cs" />
-    <Compile Include="Helpers\StringHelpers.cs" />
     <Compile Include="HttpStatusCode.cs" />
     <Compile Include="HttpVerb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

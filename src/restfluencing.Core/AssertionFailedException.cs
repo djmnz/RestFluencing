@@ -21,7 +21,7 @@ namespace restfluencing
 		{
 		}
 
-		public AssertionFailedException(string message, ExecutionResult result) : base(message)
+		public AssertionFailedException(string message, ExecutionResult result) : base($"{message} {GetFullMessage(result)}")
 		{
 			Result = result;
 		}

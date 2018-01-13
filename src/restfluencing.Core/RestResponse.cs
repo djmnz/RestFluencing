@@ -3,43 +3,46 @@ using System.Collections.Generic;
 using System.Linq;
 using restfluencing.Assertion;
 using restfluencing.Assertion.Rules;
-using restfluencing.Client;
 using restfluencing.Helpers;
 
 namespace restfluencing
 {
 	public class RestResponse
 	{
-		private const string ERROR_NO_ASSERTION =
-			"There is no Assertion configured. Use Rest.Configuration.AssertWithException() for the default assertion.";
-
-		protected RestRequest Request { get; private set; }
-		protected AssertionContext Context { get; }
-		public bool DelayAssertion { get; }
-
+		private readonly IList<AssertionRule> _rules = new List<AssertionRule>();
 
 		/// <summary>
-		/// Constructor used for sequential execution of the tests (specflow style)
+		///     Constructor used for sequential execution of the tests (specflow style)
 		/// </summary>
 		/// <param name="request"></param>
 		/// <param name="context"></param>
-		public RestResponse(RestRequest request, AssertionContext context, bool delayAssertion) 
+		public RestResponse(RestRequest request, AssertionContext context, bool delayAssertion)
 		{
 			Request = request ?? throw new ArgumentNullException(nameof(request), "No RestRequest has been provided.");
 			Context = context ?? throw new ArgumentException(nameof(context), "No AssertionContext has been provided.");
 			DelayAssertion = delayAssertion;
 		}
 
-		
-		private IList<AssertionRule> _rules = new List<AssertionRule>();
+		protected AssertionContext Context { get; }
 
 		/// <summary>
-		/// List of rules that are attached to this response.
+		///     Original Request that produced this response
+		/// </summary>
+		public RestRequest Request { get; }
+
+		/// <summary>
+		///     Whether this response is withholding the assertion of the rules as they are added
+		/// </summary>
+		public bool DelayAssertion { get; }
+
+
+		/// <summary>
+		///     List of rules that are attached to this response.
 		/// </summary>
 		public IEnumerable<AssertionRule> Rules => _rules;
 
 		/// <summary>
-		/// Adds a rule and if DelayAssertion is false will assert the rule as well.
+		///     Adds a rule and if DelayAssertion is false will assert the rule as well.
 		/// </summary>
 		/// <param name="rule"></param>
 		public void AddRule(AssertionRule rule)
@@ -49,19 +52,16 @@ namespace restfluencing
 			if (!DelayAssertion)
 			{
 				if (Request.Assertion == null)
-				{
 					throw new InvalidOperationException(ErrorMessages.NoAssertion);
-				}
 
 				var result = CreateExecutionResult();
 				result.Results.AddRange(rule.Assert(Context));
 				Request.Assertion.Assert(result);
 			}
-
 		}
 
 		/// <summary>
-		/// Removes all previous rules of same type and adds the new rule.
+		///     Removes all previous rules of same type and adds the new rule.
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="rule"></param>
@@ -72,11 +72,11 @@ namespace restfluencing
 		}
 
 		/// <summary>
-		/// Gives the results of the assertion rules against the assertion context (response).
+		///     Gives the results of the assertion rules against the assertion context (response).
 		/// </summary>
 		/// <returns></returns>
 		/// <remarks>
-		/// This is essential when using the DelayAssertion = true
+		///     This is essential when using the DelayAssertion = true
 		/// </remarks>
 		public ExecutionResult Execute()
 		{
@@ -92,17 +92,15 @@ namespace restfluencing
 
 
 		/// <summary>
-		/// Assert all the results of the assertion rules against the assertion context (response).
+		///     Assert all the results of the assertion rules against the assertion context (response).
 		/// </summary>
 		/// <remarks>
-		/// This is essential when using the DelayAssertion = true
+		///     This is essential when using the DelayAssertion = true
 		/// </remarks>
 		public void Assert()
 		{
 			if (Request.Assertion == null)
-			{
 				throw new InvalidOperationException(ErrorMessages.NoAssertion);
-			}
 			Request.Assertion.Assert(Execute());
 		}
 

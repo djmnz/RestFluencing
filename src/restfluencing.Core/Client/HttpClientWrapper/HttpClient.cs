@@ -16,17 +16,12 @@ namespace restfluencing.Client.HttpApiClient
 		{
 			using (HttpClient client = new HttpClient())
 			{
-				// Add an Accept header for JSON format.
-//				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
 				IApiClientResponse result = new ApiClientResponse();
-
-
-				client.Timeout = TimeSpan.FromSeconds(request.TimeoutInSeconds);
 
 				var httpRequest = new HttpRequestMessage(new HttpMethod(request.Verb.ToString().ToUpper()), request.Uri);
 				const string contentTypeHeader = "content-type";
 				string contentType = null;
+
 				foreach (var h in request.Headers)
 				{
 					//because the api keeps overriding the content type we have to find what we defined before
@@ -51,7 +46,9 @@ namespace restfluencing.Client.HttpApiClient
 					}
 				}
 
-				
+				// Set the timeout just prior to making the request to reduce the risk of unintended overrides (TODO make the HttpClient a singleton)
+				client.Timeout = TimeSpan.FromSeconds(request.TimeoutInSeconds);
+
 				using (HttpResponseMessage response = client.SendAsync(httpRequest).GetSyncResult())
 				{
 					result.Status = (int) response.StatusCode;

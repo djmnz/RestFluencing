@@ -76,6 +76,7 @@
     <Compile Include="Clients\TestApiFactory.cs" />
     <Compile Include="ExpressionAssertionRule.cs" />
     <Compile Include="Factories.cs" />
+    <Compile Include="BlankResponseRule.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Promo.cs" />
     <Compile Include="HasJsonSchemaRule.cs" />

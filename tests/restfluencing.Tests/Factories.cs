@@ -31,6 +31,9 @@ namespace restfluencing.Tests
 				Sizes = new List<string>() { "Large" }
 			};
 
+		
+			
+
             // Promos
 
 		    var melonPromo = new Promo()
@@ -41,20 +44,20 @@ namespace restfluencing.Tests
 
 		    var applePromo = new Promo()
 		    {
-		        Product = melonProduct,
-		        Discount = 33.45
+		        Product = appleProduct,
+		        Discount = 11
 		    };
 
-            factory.Responses.Add("/promo/1", melonPromo);
+            factory.Responses.Add("/promo/melon", melonPromo);
 
-		    factory.Responses.Add("/promo/2", applePromo);
+		    factory.Responses.Add("/promo/apple", applePromo);
 
             factory.Responses.Add("/promo", new List<Promo>()
             {
                 applePromo, melonPromo
             });
 
-            factory.Responses.Add("/product/1", appleProduct);
+            factory.Responses.Add("/product/apple", appleProduct);
 
 			factory.Responses.Add("/product", new List<Product>
 			{
@@ -65,6 +68,9 @@ namespace restfluencing.Tests
 			factory.Responses.Add("/product/empty", new List<Product>
 			{
 			});
+
+
+			factory.Responses.Add("/null", null);
 
 			return factory;
 		}

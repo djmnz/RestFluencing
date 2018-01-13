@@ -1,4 +1,5 @@
-﻿using System;
+﻿using restfluencing.Helpers;
+using System;
 
 namespace restfluencing
 {
@@ -85,7 +86,7 @@ namespace restfluencing
 
 			if (configuration.BaseUrl == null)
 			{
-				throw new ArgumentException("Relative url requests are only available if you set the Default.BaseUrl", "relative");
+				throw new ArgumentException(ErrorMessages.BaseUrlIsNotSet, "relative");
 			}
 
 			return GetFromUrl(new Uri(configuration.BaseUrl, relative), configuration);
@@ -105,7 +106,7 @@ namespace restfluencing
 
 			if (configuration.BaseUrl == null)
 			{
-				throw new ArgumentException("Relative url requests are only available if you set the Default.BaseUrl", "relative");
+				throw new ArgumentException(ErrorMessages.BaseUrlIsNotSet, "relative");
 			}
 
 			return PostToUrl(new Uri(configuration.BaseUrl, relative), configuration);
@@ -126,7 +127,7 @@ namespace restfluencing
 
 			if (configuration.BaseUrl == null)
 			{
-				throw new ArgumentException("Relative url requests are only available if you set the Default.BaseUrl", "relative");
+				throw new ArgumentException(ErrorMessages.BaseUrlIsNotSet, "relative");
 			}
 
 			return SendToUrl(HttpVerb.Put, new Uri(configuration.BaseUrl, relative), configuration);
@@ -146,7 +147,7 @@ namespace restfluencing
 
 			if (configuration.BaseUrl == null)
 			{
-				throw new ArgumentException("Relative url requests are only available if you set the Default.BaseUrl", "relative");
+				throw new ArgumentException(ErrorMessages.BaseUrlIsNotSet, "relative");
 			}
 
 			return SendToUrl(HttpVerb.Patch, new Uri(configuration.BaseUrl, relative), configuration);
@@ -166,7 +167,7 @@ namespace restfluencing
 
 			if (configuration.BaseUrl == null)
 			{
-				throw new ArgumentException("Relative url requests are only available if you set the Default.BaseUrl", "relative");
+				throw new ArgumentException(ErrorMessages.BaseUrlIsNotSet, "relative");
 			}
 
 			return SendToUrl(HttpVerb.Delete, new Uri(configuration.BaseUrl, relative), configuration);
