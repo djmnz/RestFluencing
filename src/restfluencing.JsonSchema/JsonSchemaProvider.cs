@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Schema.Generation;
 
-namespace restfluencing.JsonSchema
+namespace RestFluencing.JsonSchema
 {
 	internal class JsonSchemaProvider
 	{

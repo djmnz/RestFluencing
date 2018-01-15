@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace restfluencing.Client
+namespace RestFluencing.Client
 {
 	/// <summary>
 	/// Representation of the request

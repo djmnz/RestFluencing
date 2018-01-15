@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using restfluencing.Client;
-using restfluencing.Assertion;
+using RestFluencing.Client;
+using RestFluencing.Assertion;
 using System;
 using System.Linq;
 
-namespace restfluencing
+namespace RestFluencing
 {
 	/// <summary>
 	/// Results of processing the Response's rules.

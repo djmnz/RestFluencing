@@ -1,4 +1,4 @@
-namespace restfluencing
+namespace RestFluencing
 {
 	/// <summary>
 	/// Http verb

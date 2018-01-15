@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace restfluencing.Tests.Models
+namespace RestFluencing.Tests.Models
 {
 	public class Product
 	{

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace restfluencing.Assertion.Rules
+namespace RestFluencing.Assertion.Rules
 {
 	/// <summary>
 	/// Standard assertion rule that uses the Deserialiser to compare the expression to the respone.

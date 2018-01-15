@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using restfluencing.Client;
+using RestFluencing.Client;
 
-namespace restfluencing.Assertion
+namespace RestFluencing.Assertion
 {
 	/// <summary>
 	/// Assertion context to process the assertion rules.

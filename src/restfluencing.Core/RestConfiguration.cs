@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using restfluencing.Assertion;
-using restfluencing.Client;
-using restfluencing.Client.HttpApiClient;
-using restfluencing.Helpers;
+using RestFluencing.Assertion;
+using RestFluencing.Client;
+using RestFluencing.Client.HttpApiClient;
+using RestFluencing.Helpers;
 
-namespace restfluencing
+namespace RestFluencing
 {
 	/// <summary>
 	///     Base configuration of the requests and clients

@@ -1,4 +1,4 @@
-﻿namespace restfluencing
+﻿namespace RestFluencing
 {
 	/// <summary>
 	/// Available status codes. (note: this is a copy and paste of Microsoft definition)

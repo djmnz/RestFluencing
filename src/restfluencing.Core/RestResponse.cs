@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using restfluencing.Assertion;
-using restfluencing.Assertion.Rules;
-using restfluencing.Helpers;
+using RestFluencing.Assertion;
+using RestFluencing.Assertion.Rules;
+using RestFluencing.Helpers;
 
-namespace restfluencing
+namespace RestFluencing
 {
 	public class RestResponse
 	{

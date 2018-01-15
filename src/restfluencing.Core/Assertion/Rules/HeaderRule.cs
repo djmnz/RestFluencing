@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace restfluencing.Assertion.Rules
+namespace RestFluencing.Assertion.Rules
 {
 	public class HeaderKeyValueRule : AssertionRule
 	{

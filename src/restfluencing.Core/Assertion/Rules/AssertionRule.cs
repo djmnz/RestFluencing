@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace restfluencing.Assertion.Rules
+namespace RestFluencing.Assertion.Rules
 {
 	public abstract class AssertionRule
 	{

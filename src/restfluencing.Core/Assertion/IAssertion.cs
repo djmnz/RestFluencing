@@ -1,4 +1,4 @@
-﻿namespace restfluencing.Assertion
+﻿namespace RestFluencing.Assertion
 {
 	/// <summary>
 	/// Interface to process the results of the assertion.

@@ -1,7 +1,7 @@
-﻿using restfluencing.Helpers;
+﻿using RestFluencing.Helpers;
 using System;
 
-namespace restfluencing
+namespace RestFluencing
 {
 	/// <summary>
 	/// Rest framework entry class.

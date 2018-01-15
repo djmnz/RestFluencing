@@ -7,8 +7,8 @@
     <ProjectGuid>{BB44CC46-AAB8-4F0E-94FB-1A6B27EA3AAB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>restfluencing</RootNamespace>
-    <AssemblyName>restfluencing</AssemblyName>
+    <RootNamespace>RestFluencing</RootNamespace>
+    <AssemblyName>RestFluencing</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

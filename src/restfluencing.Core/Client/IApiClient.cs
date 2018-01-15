@@ -1,6 +1,6 @@
 using System;
 
-namespace restfluencing.Client
+namespace RestFluencing.Client
 {
 	public interface IApiClient : IDisposable
 	{

@@ -1,6 +1,6 @@
 using Newtonsoft.Json.Linq;
 
-namespace restfluencing.Client.HttpApiClient
+namespace RestFluencing.Client.HttpApiClient
 {
 	public static class HttpApiClientSetupExtensions
 	{

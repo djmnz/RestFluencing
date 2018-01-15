@@ -1,6 +1,6 @@
-using restfluencing.Assertion;
+using RestFluencing.Assertion;
 
-namespace restfluencing.Client
+namespace RestFluencing.Client
 {
 	public interface IResponseDeserialiser
 	{

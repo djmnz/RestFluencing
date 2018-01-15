@@ -1,6 +1,6 @@
-using restfluencing.Assertion;
+using RestFluencing.Assertion;
 
-namespace restfluencing
+namespace RestFluencing
 {
 	public static class RestConfigurationSetupExtensions
 	{

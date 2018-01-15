@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json.Schema.Generation;
 
-namespace restfluencing.JsonSchema
+namespace RestFluencing.JsonSchema
 {
 	public static class JsonSchemaAssertionSetupExtensions
 	{

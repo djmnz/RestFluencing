@@ -7,8 +7,8 @@
     <ProjectGuid>{6FEE443F-DAF2-4726-885D-318A8ECDF7C1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>restfluencing.JsonSchema</RootNamespace>
-    <AssemblyName>restfluencing.JsonSchema</AssemblyName>
+    <RootNamespace>RestFluencing.JsonSchema</RootNamespace>
+    <AssemblyName>RestFluencing.JsonSchema</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -61,9 +61,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\restfluencing.Core\restfluencing.Core.csproj">
+    <ProjectReference Include="..\restfluencing.Core\RestFluencing.Core.csproj">
       <Project>{bb44cc46-aab8-4f0e-94fb-1a6b27ea3aab}</Project>
-      <Name>restfluencing.Core</Name>
+      <Name>RestFluencing.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

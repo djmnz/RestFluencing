@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using restfluencing.Assertion;
+using RestFluencing.Assertion;
 using System.Text;
 
-namespace restfluencing
+namespace RestFluencing
 {
 	/// <summary>
 	/// Exception raised when an Assertion rule failed.

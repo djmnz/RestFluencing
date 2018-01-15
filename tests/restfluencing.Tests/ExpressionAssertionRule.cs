@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using restfluencing.Tests.Clients;
-using restfluencing.Tests.Models;
-using restfluencing.Assertion;
+using RestFluencing.Tests.Clients;
+using RestFluencing.Tests.Models;
+using RestFluencing.Assertion;
 
-namespace restfluencing.Tests
+namespace RestFluencing.Tests
 {
 	[TestClass]
     public class ExpressionAssertionRuleTests

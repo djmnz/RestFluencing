@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using restfluencing.Assertion;
-using restfluencing.Client;
-using restfluencing.Helpers;
+using RestFluencing.Assertion;
+using RestFluencing.Client;
+using RestFluencing.Helpers;
 
-namespace restfluencing
+namespace RestFluencing
 {
 	/// <summary>
 	///     Representation of the request setup

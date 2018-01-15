@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace restfluencing.Helpers
+namespace RestFluencing.Helpers
 {
 	internal static class ConcurrencyExtensions
 	{

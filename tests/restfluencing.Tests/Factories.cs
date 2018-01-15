@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using restfluencing.Tests.Clients;
-using restfluencing.Tests.Models;
-using restfluencing.Client;
+using RestFluencing.Tests.Clients;
+using RestFluencing.Tests.Models;
+using RestFluencing.Client;
 
-namespace restfluencing.Tests
+namespace RestFluencing.Tests
 {
 	public static class Factories
 	{

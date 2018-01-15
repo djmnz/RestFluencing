@@ -1,6 +1,6 @@
-using restfluencing.Assertion.Rules;
+using RestFluencing.Assertion.Rules;
 
-namespace restfluencing.Assertion
+namespace RestFluencing.Assertion
 {
 	/// <summary>
 	/// Details of an assertion failure.

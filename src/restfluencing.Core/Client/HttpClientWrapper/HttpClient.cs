@@ -5,9 +5,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using restfluencing.Helpers;
+using RestFluencing.Helpers;
 
-namespace restfluencing.Client.HttpApiClient
+namespace RestFluencing.Client.HttpApiClient
 {
 	public class HttpApiClient : IApiClient
 	{

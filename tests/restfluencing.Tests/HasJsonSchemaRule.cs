@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using restfluencing.Tests.Clients;
-using restfluencing.Tests.Models;
-using restfluencing;
-using restfluencing.JsonSchema;
+using RestFluencing.Tests.Clients;
+using RestFluencing.Tests.Models;
+using RestFluencing;
+using RestFluencing.JsonSchema;
 
-namespace restfluencing.Tests
+namespace RestFluencing.Tests
 {
 	[TestClass]
 	public class HasJsonSchemaRuleTests
@@ -71,7 +71,7 @@ namespace restfluencing.Tests
 		[TestMethod]
 		public void FailOnSingleItemExpectingList()
 		{
-			Rest.Get("/product/1", _configuration)
+			Rest.Get("/product/apple", _configuration)
 				.Response(true)
 				.HasJsonSchema<IList<Product>>()
 				.Execute()

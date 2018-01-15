@@ -1,4 +1,4 @@
-namespace restfluencing.Tests.Models
+namespace RestFluencing.Tests.Models
 {
 	public class Promo
 	{

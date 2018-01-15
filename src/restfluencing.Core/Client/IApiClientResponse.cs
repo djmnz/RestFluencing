@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace restfluencing.Client
+namespace RestFluencing.Client
 {
 	public interface IApiClientResponse
 	{

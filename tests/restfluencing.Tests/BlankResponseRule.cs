@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using restfluencing.Tests.Clients;
-using restfluencing.Tests.Models;
-using restfluencing;
-using restfluencing.Assertion;
-using restfluencing.JsonSchema;
+using RestFluencing.Tests.Clients;
+using RestFluencing.Tests.Models;
+using RestFluencing;
+using RestFluencing.Assertion;
+using RestFluencing.JsonSchema;
 
-namespace restfluencing.Tests
+namespace RestFluencing.Tests
 {
 	[TestClass]
 	public class BlankResponseRuleTests

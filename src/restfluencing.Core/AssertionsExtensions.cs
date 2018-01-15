@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using restfluencing.Assertion;
+using RestFluencing.Assertion;
 
-namespace restfluencing
+namespace RestFluencing
 {
 	public static class AssertionsExtensions
 	{

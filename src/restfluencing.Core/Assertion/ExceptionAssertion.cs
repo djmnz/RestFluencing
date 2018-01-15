@@ -1,4 +1,4 @@
-﻿namespace restfluencing.Assertion
+﻿namespace RestFluencing.Assertion
 {
 	/// <summary>
 	/// Assertion that throws an exception when rules were violated.

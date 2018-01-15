@@ -1,8 +1,8 @@
 using Newtonsoft.Json.Linq;
-using restfluencing.Assertion;
+using RestFluencing.Assertion;
 using System;
 
-namespace restfluencing.Client
+namespace RestFluencing.Client
 {
 	/// <summary>
 	/// Standard Json Deserialiser that stores the value into the context property to the specified type.

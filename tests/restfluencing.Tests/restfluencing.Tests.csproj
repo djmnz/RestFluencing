@@ -83,13 +83,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\restfluencing.Core\restfluencing.Core.csproj">
+    <ProjectReference Include="..\..\src\restfluencing.Core\RestFluencing.Core.csproj">
       <Project>{BB44CC46-AAB8-4F0E-94FB-1A6B27EA3AAB}</Project>
-      <Name>restfluencing.Core</Name>
+      <Name>RestFluencing.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\restfluencing.JsonSchema\restfluencing.JsonSchema.csproj">
+    <ProjectReference Include="..\..\src\restfluencing.JsonSchema\RestFluencing.JsonSchema.csproj">
       <Project>{6fee443f-daf2-4726-885d-318a8ecdf7c1}</Project>
-      <Name>restfluencing.JsonSchema</Name>
+      <Name>RestFluencing.JsonSchema</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

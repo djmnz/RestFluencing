@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace restfluencing.Assertion
+namespace RestFluencing.Assertion
 {
 	/// <summary>
 	/// Assertion that writes into the Console the results.

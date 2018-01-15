@@ -1,4 +1,4 @@
-namespace restfluencing.Client
+namespace RestFluencing.Client
 {
 	public interface IClientBuilder
 	{

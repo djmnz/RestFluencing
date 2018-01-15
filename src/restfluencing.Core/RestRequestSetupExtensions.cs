@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using restfluencing.Client;
-using restfluencing.Helpers;
+using RestFluencing.Client;
+using RestFluencing.Helpers;
 
-namespace restfluencing
+namespace RestFluencing
 {
 	public static class RestRequestSetupExtensions
 	{

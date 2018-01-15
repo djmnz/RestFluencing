@@ -2,10 +2,10 @@
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Schema.Generation;
-using restfluencing.Assertion;
-using restfluencing.Assertion.Rules;
+using RestFluencing.Assertion;
+using RestFluencing.Assertion.Rules;
 
-namespace restfluencing.JsonSchema
+namespace RestFluencing.JsonSchema
 {
 	public class JsonModelSchemaAssertionRule<T> : AssertionRule
 	{

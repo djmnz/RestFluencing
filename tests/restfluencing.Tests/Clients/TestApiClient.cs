@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using restfluencing.Tests.Models;
-using restfluencing;
-using restfluencing.Client;
+using RestFluencing.Tests.Models;
+using RestFluencing;
+using RestFluencing.Client;
 
-namespace restfluencing.Tests.Clients
+namespace RestFluencing.Tests.Clients
 {
 	public class TestApiClient : IApiClient
 	{
@@ -22,6 +22,14 @@ namespace restfluencing.Tests.Clients
 
 		public IApiClientResponse ExecuteRequest(IApiClientRequest request)
 		{
+			if (Responses[request.Uri.AbsolutePath] == null)
+			{
+				return new ApiClientResponse()
+				{
+					Content = "",
+					StatusCode = HttpStatusCode.OK
+				};
+			}
 			return new ApiClientResponse()
 			{
 				Content = JsonConvert.SerializeObject(Responses[request.Uri.AbsolutePath]),

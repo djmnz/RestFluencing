@@ -1,4 +1,4 @@
-namespace restfluencing.Client.HttpApiClient
+namespace RestFluencing.Client.HttpApiClient
 {
 	public class HttpApiClientBuilder : IClientBuilder
 	{
