@@ -48,13 +48,17 @@ _configuration.Get("/users/defunkt")
 
 When invoking `RestConfiguration.JsonDefault()` it gives you a configuration instance with the following defaults:
 
-*Headers*: 
+**Headers**: 
 `Content-Type: application/json`
+
 `Accept: application/json`
 
-*Deserialiser:* `JsonResponseDeserialiser` (Json.Net)
-*ApiClient:* Wrapper for `System.Net.Http.HttpClient`
-*Assertion:* `ExceptionAssertion` (can be replaced with `ConsoleAssertion`)
+
+**Deserialiser:** `JsonResponseDeserialiser` (Json.Net)
+
+**ApiClient:** Wrapper for `System.Net.Http.HttpClient`
+
+**Assertion:** `ExceptionAssertion` (can be replaced with `ConsoleAssertion`)
 
 
 # Asserting Response
@@ -71,7 +75,7 @@ _configuration.Get("/users/defunkt")
 
 ## As From Strongly Typed Model
 
-*Model:*
+**Model:**
 ``` C#
 public class GitHubUser
 {
@@ -80,7 +84,7 @@ public class GitHubUser
 }
 ```
 
-*Test:*
+**Test:**
 
 ``` C#
 _configuration.Get("/users/defunkt")
@@ -92,7 +96,7 @@ _configuration.Get("/users/defunkt")
 
 ## Asserting Header
 
-*Test:*
+**Test:**
 
 ``` C#
 _configuration.Get("/users/defunkt")
@@ -106,7 +110,7 @@ _configuration.Get("/users/defunkt")
 
 ## Failure Message Example 
 
-*Test*
+**Test**
 
 ``` C#
 _configuration.Get("/users/defunkt")
@@ -133,5 +137,31 @@ Content-Type : application/json; charset=utf-8
 Last-Modified : ...
 ```
 
+## Asserting Model Schema
 
+**This example needs an extra package** `RestFluencing.JsonSchema`
 
+**Test**
+
+``` C#
+_configuration.Get("/users/defunkt")
+	.Response()
+	.HasJsonSchema<GitHubUser>()
+	.Assert();
+
+```
+
+### Configuring schema validation
+
+The schema validation is based on the JsonSchema by NewtonSoft. You can read its documentation for further validations.
+
+You can pass in your own Schema Validator too:
+
+``` C#
+_configuration.Get("/users/defunkt")
+	.Response()
+	.HasJsonSchema<GitHubUser>(new JSchemaGenerator())
+	.Assert();
+```
+
+And apply any relevant attribute to your model.
