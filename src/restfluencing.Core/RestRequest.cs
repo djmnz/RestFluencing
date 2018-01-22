@@ -110,7 +110,7 @@ namespace RestFluencing
 		/// </summary>
 		/// <param name="delayAssertion"></param>
 		/// <returns></returns>
-		public RestResponse Response(bool delayAssertion = false)
+		public RestResponse Response(bool autoAssertWhenAddingRules = false)
 		{
 			var clientBuilder = Configuration.ClientFactory;
 			if (clientBuilder == null)
@@ -130,7 +130,7 @@ namespace RestFluencing
 				};
 				context.Response = client.ExecuteRequest(context.Request);
 
-				var response = new RestResponse(this, context, delayAssertion);
+				var response = new RestResponse(this, context, autoAssertWhenAddingRules);
 				return response;
 			}
 		}

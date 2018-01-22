@@ -10,9 +10,9 @@ namespace RestFluencing
 	public static class Rest
 	{
 		/// <summary>
-		/// Default configuration for when none is defined in a Rest request.
+		/// Default configuration for when none is defined in a Rest request when none is used.
 		/// </summary>
-		public static RestConfiguration Configuration { get; set; } = RestConfiguration.JsonDefault();
+		private static RestConfiguration Configuration { get; set; } = RestConfiguration.JsonDefault();
 
 		/// <summary>
 		/// Prepare a GET request to the URL
@@ -22,7 +22,11 @@ namespace RestFluencing
 		/// <returns></returns>
 		public static RestRequest GetFromUrl(Uri url, RestConfiguration configuration = null)
 		{
-			return SendToUrl(HttpVerb.Get, url, configuration);
+			if (url == null)
+			{
+				throw new ArgumentNullException(nameof(url), ErrorMessages.NoUrl);
+			}
+			return PrepareToUrl(HttpVerb.Get, url, configuration);
 		}
 
 		/// <summary>
@@ -33,7 +37,11 @@ namespace RestFluencing
 		/// <returns></returns>
 		public static RestRequest PostToUrl(Uri url, RestConfiguration configuration = null)
 		{
-			return SendToUrl(HttpVerb.Post, url, configuration);
+			if (url == null)
+			{
+				throw new ArgumentNullException(nameof(url), ErrorMessages.NoUrl);
+			}
+			return PrepareToUrl(HttpVerb.Post, url, configuration);
 		}
 
 		/// <summary>
@@ -42,8 +50,13 @@ namespace RestFluencing
 		/// <param name="verb">Verb to use</param>
 		/// <param name="url">URL to send the request to</param>
 		/// <param name="configuration">Configuration to apply to the request - null to use <see cref="Configuration"/></param>
-		public static RestRequest SendToUrl(HttpVerb verb, Uri url, RestConfiguration configuration = null)
+		public static RestRequest PrepareToUrl(HttpVerb verb, Uri url, RestConfiguration configuration = null)
 		{
+			if (url == null)
+			{
+				throw new ArgumentNullException(nameof(url), ErrorMessages.NoUrl);
+			}
+
 			if (configuration == null)
 			{
 				configuration = Configuration;
@@ -130,7 +143,7 @@ namespace RestFluencing
 				throw new ArgumentException(ErrorMessages.BaseUrlIsNotSet, "relative");
 			}
 
-			return SendToUrl(HttpVerb.Put, new Uri(configuration.BaseUrl, relative), configuration);
+			return PrepareToUrl(HttpVerb.Put, new Uri(configuration.BaseUrl, relative), configuration);
 		}
 
 		/// <summary>
@@ -150,7 +163,7 @@ namespace RestFluencing
 				throw new ArgumentException(ErrorMessages.BaseUrlIsNotSet, "relative");
 			}
 
-			return SendToUrl(HttpVerb.Patch, new Uri(configuration.BaseUrl, relative), configuration);
+			return PrepareToUrl(HttpVerb.Patch, new Uri(configuration.BaseUrl, relative), configuration);
 		}
 
 		/// <summary>
@@ -170,7 +183,7 @@ namespace RestFluencing
 				throw new ArgumentException(ErrorMessages.BaseUrlIsNotSet, "relative");
 			}
 
-			return SendToUrl(HttpVerb.Delete, new Uri(configuration.BaseUrl, relative), configuration);
+			return PrepareToUrl(HttpVerb.Delete, new Uri(configuration.BaseUrl, relative), configuration);
 		}
 
 	}

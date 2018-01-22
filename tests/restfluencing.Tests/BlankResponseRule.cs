@@ -8,6 +8,7 @@ using RestFluencing.JsonSchema;
 
 namespace RestFluencing.Tests
 {
+	//TODO make the tests only test the new rule and extension
 	[TestClass]
 	public class BlankResponseRuleTests
 	{
@@ -33,8 +34,8 @@ namespace RestFluencing.Tests
 		public void NotBlankShouldFail()
 		{
 			Rest.Get("/product/apple", _configuration)
-				.Response(true)
-				.IsEmpty()
+				.Response()
+				.ReturnsEmptyContent()
 				.Execute()
 				.ShouldFail();
 		}
@@ -43,14 +44,15 @@ namespace RestFluencing.Tests
 		public void BlankShouldPass()
 		{
 			Rest.Get("/null", _configuration)
-				.Response(true)
-				.IsEmpty()
+				.Response()
+				.ReturnsEmptyContent()
 				.Execute()
 				.ShouldPass();
 		}
 	}
 
 
+	//TODO make the tests only test the new rule and extension
 	[TestClass]
 	public class NotBlankResponseRuleTests
 	{
@@ -76,8 +78,8 @@ namespace RestFluencing.Tests
 		public void NotBlankShouldPass()
 		{
 			Rest.Get("/product/apple", _configuration)
-				.Response(true)
-				.IsNotEmpty()
+				.Response()
+				.ReturnsContent()
 				.Execute()
 				.ShouldPass();
 		}
@@ -86,8 +88,8 @@ namespace RestFluencing.Tests
 		public void BlankShouldFail()
 		{
 			Rest.Get("/null", _configuration)
-				.Response(true)
-				.IsNotEmpty()
+				.Response()
+				.ReturnsContent()
 				.Execute()
 				.ShouldFail();
 		}

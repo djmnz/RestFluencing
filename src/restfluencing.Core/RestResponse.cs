@@ -16,11 +16,11 @@ namespace RestFluencing
 		/// </summary>
 		/// <param name="request"></param>
 		/// <param name="context"></param>
-		public RestResponse(RestRequest request, AssertionContext context, bool delayAssertion)
+		public RestResponse(RestRequest request, AssertionContext context, bool autoAssertWhenAddingRule)
 		{
 			Request = request ?? throw new ArgumentNullException(nameof(request), "No RestRequest has been provided.");
 			Context = context ?? throw new ArgumentException(nameof(context), "No AssertionContext has been provided.");
-			DelayAssertion = delayAssertion;
+			AutoAssertWhenAddingRule = autoAssertWhenAddingRule;
 		}
 
 		protected AssertionContext Context { get; }
@@ -31,9 +31,9 @@ namespace RestFluencing
 		public RestRequest Request { get; }
 
 		/// <summary>
-		///     Whether this response is withholding the assertion of the rules as they are added
+		///     Whether the rules should be asserted as they are added - this elimiates the need to call Assert() at the end of the test.
 		/// </summary>
-		public bool DelayAssertion { get; }
+		public bool AutoAssertWhenAddingRule { get; }
 
 
 		/// <summary>
@@ -42,21 +42,26 @@ namespace RestFluencing
 		public IEnumerable<AssertionRule> Rules => _rules;
 
 		/// <summary>
-		///     Adds a rule and if DelayAssertion is false will assert the rule as well.
+		///     Adds a rule to be asserted. If <code>AutoAssertWhenAddingRule</code> is <code>true</code> then will also assert the new rule.
 		/// </summary>
 		/// <param name="rule"></param>
 		public void AddRule(AssertionRule rule)
 		{
 			_rules.Add(rule);
 
-			if (!DelayAssertion)
+			if (AutoAssertWhenAddingRule)
 			{
 				if (Request.Assertion == null)
 					throw new InvalidOperationException(ErrorMessages.NoAssertion);
 
-				var result = CreateExecutionResult();
-				result.Results.AddRange(rule.Assert(Context));
-				Request.Assertion.Assert(result);
+				var assertionResults = rule.Assert(Context);
+				if (assertionResults.Any())
+				{
+					var result = CreateExecutionResult();
+					result.Results.AddRange(assertionResults);
+					Request.Assertion.Assert(result);
+				}
+
 			}
 		}
 
@@ -92,7 +97,7 @@ namespace RestFluencing
 
 
 		/// <summary>
-		///     Assert all the results of the assertion rules against the assertion context (response).
+		///     This will assert all of the rules and expect that there will be no failure from their execution.
 		/// </summary>
 		/// <remarks>
 		///     This is essential when using the DelayAssertion = true
@@ -101,7 +106,31 @@ namespace RestFluencing
 		{
 			if (Request.Assertion == null)
 				throw new InvalidOperationException(ErrorMessages.NoAssertion);
-			Request.Assertion.Assert(Execute());
+
+			// since the rules were not being asserted, then we assert them now.
+			var executionResult = Execute();
+			if (executionResult.Results.Any())
+			{
+				Request.Assertion.Assert(executionResult);
+			}
+		}
+
+		/// <summary>
+		///		This will execute all the rules and expect that it will have at least one failure from the assertion rules.
+		/// </summary>
+		public void AssertFailure()
+		{
+			if (Request.Assertion == null)
+				throw new InvalidOperationException(ErrorMessages.NoAssertion);
+
+
+
+			var executionResult = Execute();
+			if (!executionResult.Results.Any())
+			{
+				executionResult.Results.Add(new AssertionResult(new AssertFailureRule(), "Expected at least one assertion failure, found none. All the assertion rules were met."));
+				Request.Assertion.Assert(executionResult);
+			}
 		}
 
 		private ExecutionResult CreateExecutionResult()

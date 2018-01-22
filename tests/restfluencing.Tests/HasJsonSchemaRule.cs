@@ -32,7 +32,7 @@ namespace RestFluencing.Tests
 		public void SuccessProductModel()
 		{
 			Rest.Get("/product/apple", _configuration)
-				.Response(true)
+				.Response()
 				.HasJsonSchema<Product>()
 				.Execute()
 				.ShouldPass();
@@ -42,7 +42,7 @@ namespace RestFluencing.Tests
 		public void SuccessPromoModel()
 		{
 			Rest.Get("/promo/apple", _configuration)
-				.Response(true)
+				.Response()
 				.HasJsonSchema<Promo>()
 				.Execute()
 				.ShouldPass();
@@ -52,7 +52,7 @@ namespace RestFluencing.Tests
 		public void SuccessListModel()
 		{
 			Rest.Get("/product", _configuration)
-				.Response(true)
+				.Response()
 				.HasJsonSchema<IList<Product>>()
 				.Execute()
 				.ShouldPass();
@@ -62,7 +62,7 @@ namespace RestFluencing.Tests
 		public void SuccessEmptyListModel()
 		{
 			Rest.Get("/product/empty", _configuration)
-				.Response(true)
+				.Response()
 				.HasJsonSchema<IList<Product>>()
 				.Execute()
 				.ShouldPass();
@@ -72,7 +72,7 @@ namespace RestFluencing.Tests
 		public void FailOnSingleItemExpectingList()
 		{
 			Rest.Get("/product/apple", _configuration)
-				.Response(true)
+				.Response()
 				.HasJsonSchema<IList<Product>>()
 				.Execute()
 				.ShouldFailForRule<JsonModelSchemaAssertionRule<IList<Product>>>();
@@ -82,7 +82,7 @@ namespace RestFluencing.Tests
 		public void FailOnManyItemsButExpectingDifferentModel()
 		{
 			Rest.Get("/promo", _configuration)
-				.Response(true)
+				.Response()
 				.HasJsonSchema<IList<Product>>()
 				.Execute()
 				.ShouldFailForRule<JsonModelSchemaAssertionRule<IList<Product>>>();
@@ -92,7 +92,7 @@ namespace RestFluencing.Tests
 		public void FailOnDifferentModelNotArray()
 		{
 			Rest.Get("/product", _configuration)
-				.Response(true)
+				.Response()
 				.HasJsonSchema<Product>()
 				.Execute()
 				.ShouldFailForRule<JsonModelSchemaAssertionRule<Product>>();

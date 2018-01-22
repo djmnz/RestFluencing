@@ -30,7 +30,7 @@ namespace RestFluencing.Tests
 	    public void WhenProperty_Equals_ShouldPass()
 	    {
 		    Rest.Get("/product/apple", _configuration)
-			    .Response(true)
+			    .Response()
 			    .Returns<Product>(x => x.Name == "Apple")
 			    .Execute()
 			    .ShouldPass();
@@ -40,7 +40,7 @@ namespace RestFluencing.Tests
 	    public void WhenDynamicProperty_Equals_ShouldPass()
 	    {
 		    Rest.Get("/product/apple", _configuration)
-			    .Response(true)
+			    .Response()
 			    .Returns<Product>(x => x.Name == "Apple")
 			    .Execute()
 			    .ShouldPass();
@@ -50,7 +50,7 @@ namespace RestFluencing.Tests
 	    public void WhenDynamicProperty_NotEquals_ShouldFail()
 	    {
 		    Rest.Get("/product/apple", _configuration)
-			    .Response(true)
+			    .Response()
 			    .Returns<Product>(x => x.Name == "NotApple")
 			    .Execute()
 			    .ShouldFail();
@@ -60,7 +60,7 @@ namespace RestFluencing.Tests
         public void WhenProperty_NotEquals_ShouldFail()
         {
             Rest.Get("/product/apple", _configuration)
-                .Response(true)
+                .Response()
 				.Returns<Product>(x => x.Name == "Fail test")
 	            .Execute()
                 .ShouldFail();
@@ -70,7 +70,7 @@ namespace RestFluencing.Tests
         public void WhenType_DoesNotMatch_ShouldFail()
         {
             Rest.Get("/product/apple", _configuration)
-                .Response(true)
+                .Response()
 	            .Returns<Promo>(x => x.Discount > 0)
 	            .Execute()
                 .ShouldFail();

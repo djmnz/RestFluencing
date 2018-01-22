@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace RestFluencing.Assertion.Rules
 {
@@ -48,12 +49,14 @@ namespace RestFluencing.Assertion.Rules
 	{
 		private string headerKey;
 		private readonly Func<IEnumerable<string>, bool> _assertion;
+		private readonly string _assertBody;
 		private readonly string _message;
 
-		public HeaderAssertRule(string headerKey, Func<IEnumerable<string>, bool> assertion, string message) : base("HeaderAssertRule")
+		public HeaderAssertRule(string headerKey, Expression<Func<IEnumerable<string>, bool>> expression, string message) : base("HeaderAssertRule")
 		{
 			this.headerKey = headerKey;
-			_assertion = assertion;
+			_assertion = expression.Compile();
+			_assertBody = expression.Body.ToString();
 			_message = message;
 		}
 
@@ -61,7 +64,7 @@ namespace RestFluencing.Assertion.Rules
 		{
 			if (context.Response.Headers.ContainsKey(headerKey) && !_assertion(context.Response.Headers[headerKey]))
 			{
-				yield return new AssertionResult(this, $"Expected header rule on {headerKey} failed: {_message}");
+				yield return new AssertionResult(this, $"Expected rule {_assertBody} on header key {headerKey} failed: {_message}");
 			}
 		}
 	}

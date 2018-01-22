@@ -18,29 +18,17 @@ namespace RestFluencing
 		/// <returns></returns>
 		public static RestRequest WithHeader(this RestRequest request, string key, string value, bool overrideExisting = true)
 		{
-			var headers = request.Request.Headers;
-			if (headers.ContainsKey(key))
+			if (request == null)
 			{
-				var list = headers[key] as List<string>;
-				if (list == null)
-				{
-					throw new InvalidOperationException(
-						ErrorMessages.InvalidHeaderValueType);
-				}
-
-				if (overrideExisting && list.Contains(value))
-				{
-					list.Remove(value);
-				}
-
-				list.Add(value);
+				throw new ArgumentNullException(nameof(request));
 			}
-			else
+
+			if (string.IsNullOrEmpty(key))
 			{
-				var list = new List<string> { value };
-				headers.Add(key, list);
-
+				throw new ArgumentException(ErrorMessages.HeaderMustHaveKey);
 			}
+
+			HeaderHelper.AddHeader(request.Request.Headers, key, value, overrideExisting);
 
 			return request;
 		}
@@ -51,9 +39,33 @@ namespace RestFluencing
 		/// <param name="request"></param>
 		/// <param name="obj"></param>
 		/// <returns></returns>
-		public static RestRequest WithJsonBody(this RestRequest request, dynamic obj)
+		public static RestRequest WithJsonBody(this RestRequest request, dynamic obj, JsonSerializerSettings settings = null)
 		{
-			return WithBody(request, JsonConvert.SerializeObject(obj), "application/json");
+			if (request == null)
+			{
+				throw new ArgumentNullException(nameof(request));
+			}
+			settings = settings ?? new JsonSerializerSettings();
+
+			return WithBody(request, JsonConvert.SerializeObject(obj, settings), "application/json");
+		}
+
+		/// <summary>
+		/// Serialises the object and sets up the request to send it as a json.
+		/// </summary>
+		/// <param name="request"></param>
+		/// <param name="obj"></param>
+		/// <returns></returns>
+		public static RestRequest WithJsonBody<T>(this RestRequest request, T obj, JsonSerializerSettings settings = null)
+		{
+			if (request == null)
+			{
+				throw new ArgumentNullException(nameof(request));
+			}
+
+			settings = settings ?? new JsonSerializerSettings();
+
+			return WithBody(request, JsonConvert.SerializeObject(obj, settings), "application/json");
 		}
 
 		/// <summary>
@@ -64,6 +76,10 @@ namespace RestFluencing
 		/// <returns></returns>
 		public static RestRequest WithJsonBody(this RestRequest request, string content)
 		{
+			if (request == null)
+			{
+				throw new ArgumentNullException(nameof(request));
+			}
 			return WithBody(request, content, "application/json");
 		}
 
@@ -76,6 +92,11 @@ namespace RestFluencing
 		/// <returns></returns>
 		public static RestRequest WithBody(this RestRequest request, string content, string contentTypeHeader = null)
 		{
+			if (request == null)
+			{
+				throw new ArgumentNullException(nameof(request));
+			}
+
 			if (!string.IsNullOrEmpty(contentTypeHeader))
 			{
 				request.WithHeader("Content-Type", contentTypeHeader);

@@ -51,6 +51,7 @@
     <Compile Include="Assertion\AssertionResult.cs" />
     <Compile Include="Assertion\ConsoleAssertion.cs" />
     <Compile Include="Assertion\ExceptionAssertion.cs" />
+    <Compile Include="Assertion\Rules\AssertFailureRule.cs" />
     <Compile Include="Assertion\Rules\BlankResponseAssertionRule.cs" />
     <Compile Include="Assertion\Rules\ExpressionAssertionRule.cs" />
     <Compile Include="Assertion\IAssertion.cs" />
@@ -73,11 +74,13 @@
     <Compile Include="Helpers\ConcurrencyExtensions.cs" />
     <Compile Include="Helpers\DefaultValues.cs" />
     <Compile Include="Helpers\ErrorMessages.cs" />
+    <Compile Include="Helpers\HeaderHelper.cs" />
     <Compile Include="HttpStatusCode.cs" />
     <Compile Include="HttpVerb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rest.cs" />
     <Compile Include="RestConfiguration.cs" />
+    <Compile Include="RestConfigurationRequestExtensions.cs" />
     <Compile Include="RestConfigurationSetupExtensions.cs" />
     <Compile Include="RestRequest.cs" />
     <Compile Include="RestRequestSetupExtensions.cs" />

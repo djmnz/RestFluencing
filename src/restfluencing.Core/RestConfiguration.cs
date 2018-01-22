@@ -64,6 +64,7 @@ namespace RestFluencing
 
 		/// <summary>
 		///     Default configuration for asserting an Http Json end point.
+		///		Sets the Accept and Content-Type to be application/json, uses the HttpClient and the JsonDeserialiser.
 		/// </summary>
 		/// <returns></returns>
 		public static RestConfiguration JsonDefault()
