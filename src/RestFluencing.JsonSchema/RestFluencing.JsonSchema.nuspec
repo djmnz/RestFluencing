@@ -13,5 +13,8 @@
 		<description>$description$</description>
 		<copyright>Copyright 2018 djmnz</copyright>
 		<tags>rest test fluent api framework http testing validation schema plugin extension</tags>
+		<dependencies>
+			<dependency id="RestFluencing" version="$version$" />
+		</dependencies>
 	</metadata>
 </package>
