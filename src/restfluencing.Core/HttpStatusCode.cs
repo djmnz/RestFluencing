@@ -5,6 +5,7 @@
 	/// </summary>
 	public enum HttpStatusCode
 	{
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 		Continue = 100,
 		SwitchingProtocols = 101,
 		OK = 200,
@@ -52,5 +53,6 @@
 		ServiceUnavailable = 503,
 		GatewayTimeout = 504,
 		HttpVersionNotSupported = 505,
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 	}
 }

@@ -13,11 +13,18 @@ namespace RestFluencing.Client
 		private const string BaseResponseKey = "BaseResponse";
 		private static Object _responseLock= new Object();
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public JsonResponseDeserialiser() : this(null)
 		{
 			
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="loadSettings"></param>
 		public JsonResponseDeserialiser(JsonLoadSettings loadSettings)
 		{
 			_loadSettings = loadSettings;

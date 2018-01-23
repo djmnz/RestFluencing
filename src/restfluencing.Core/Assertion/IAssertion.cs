@@ -5,6 +5,10 @@
 	/// </summary>
 	public interface IAssertion
 	{
+		/// <summary>
+		/// Assert method to assert the result
+		/// </summary>
+		/// <param name="result">result to be asserted</param>
 		void Assert(ExecutionResult result);
 	}
 }

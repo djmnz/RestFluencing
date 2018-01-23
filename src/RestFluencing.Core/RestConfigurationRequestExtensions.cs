@@ -3,6 +3,9 @@ using System;
 
 namespace RestFluencing
 {
+	/// <summary>
+	/// Extensions for the creating a RestRequest from a RestConfiguration
+	/// </summary>
 	public static class RestConfigurationRequestExtensions
 	{
 		/// <summary>

@@ -4,6 +4,9 @@ using RestFluencing.Helpers;
 
 namespace RestFluencing
 {
+	/// <summary>
+	/// Extensions for helping configuring the RestConfiguration instance
+	/// </summary>
 	public static class RestConfigurationSetupExtensions
 	{
 
@@ -40,10 +43,10 @@ namespace RestFluencing
 		/// <summary>
 		/// Adds a header into the request defaults. 
 		/// </summary>
-		/// <param name="request">Request to be modified</param>
-		/// <param name="key">Header key to add</param>
-		/// <param name="value">Value of the key</param>
-		/// <param name="overrideExisting">If <code>true</code> will dispose of any existing value on the header key</param>
+		/// <param name="config">Request to be modified</param>
+		/// <param name="headerKey">Header key to add</param>
+		/// <param name="headerValue">Value of the key</param>
+		/// <param name="overrideExistingValue">If <code>true</code> will dispose of any existing value on the header key</param>
 		/// <returns></returns>
 		public static RestConfiguration WithHeader(this RestConfiguration config, string headerKey, string headerValue,
 			bool overrideExistingValue = true)

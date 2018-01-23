@@ -2,6 +2,9 @@ using Newtonsoft.Json.Linq;
 
 namespace RestFluencing.Client.HttpApiClient
 {
+	/// <summary>
+	/// Extensions to help configure the RestConfiguration to use the standard HttpApiClient factory.
+	/// </summary>
 	public static class HttpApiClientSetupExtensions
 	{
 		/// <summary>

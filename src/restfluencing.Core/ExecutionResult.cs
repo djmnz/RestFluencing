@@ -11,7 +11,14 @@ namespace RestFluencing
 	/// </summary>
 	public class ExecutionResult
 	{
+		/// <summary>
+		/// List of assertion results that this instance has.
+		/// </summary>
 		public List<AssertionResult> Results { get; set; }
+
+		/// <summary>
+		/// Response that generate the results.
+		/// </summary>
 		public IApiClientResponse Response { get; set; }
 
 		/// <summary>

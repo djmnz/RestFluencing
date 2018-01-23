@@ -6,6 +6,9 @@ using RestFluencing.Helpers;
 
 namespace RestFluencing
 {
+	/// <summary>
+	/// Extensions to help setting up the RestRequest
+	/// </summary>
 	public static class RestRequestSetupExtensions
 	{
 		/// <summary>
@@ -36,8 +39,9 @@ namespace RestFluencing
 		/// <summary>
 		/// Serialises the object and sets up the request to send it as a json.
 		/// </summary>
-		/// <param name="request"></param>
-		/// <param name="obj"></param>
+		/// <param name="request">Request to add the body content</param>
+		/// <param name="obj">Object to be serialised</param>
+		/// <param name="settings">Custom settings to use when serialising the object</param>
 		/// <returns></returns>
 		public static RestRequest WithJsonBody(this RestRequest request, dynamic obj, JsonSerializerSettings settings = null)
 		{
@@ -53,8 +57,9 @@ namespace RestFluencing
 		/// <summary>
 		/// Serialises the object and sets up the request to send it as a json.
 		/// </summary>
-		/// <param name="request"></param>
-		/// <param name="obj"></param>
+		/// <param name="request">Request to add the body content</param>
+		/// <param name="obj">Object to be serialised</param>
+		/// <param name="settings">Custom settings to use when serialising the object</param>
 		/// <returns></returns>
 		public static RestRequest WithJsonBody<T>(this RestRequest request, T obj, JsonSerializerSettings settings = null)
 		{
@@ -72,7 +77,7 @@ namespace RestFluencing
 		/// Prepares the request to submit the string content as json
 		/// </summary>
 		/// <param name="request">Request to be modified</param>
-		/// <param name="content">String content. Expected to be JSON</param>
+		/// <param name="content">String content. Expected to be JSON as it changes the <code>Content-Type</code> header</param>
 		/// <returns></returns>
 		public static RestRequest WithJsonBody(this RestRequest request, string content)
 		{

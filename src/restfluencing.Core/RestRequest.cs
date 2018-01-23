@@ -11,6 +11,10 @@ namespace RestFluencing
 	/// </summary>
 	public class RestRequest
 	{
+		/// <summary>
+		/// Creates a new instance of RestRequest using the configuration provided.
+		/// </summary>
+		/// <param name="configuration"></param>
 		public RestRequest(RestConfiguration configuration)
 		{
 			if (configuration.ClientFactory == null)
@@ -108,7 +112,7 @@ namespace RestFluencing
 		/// <summary>
 		///     Process the request and returns the response to be asserted.
 		/// </summary>
-		/// <param name="delayAssertion"></param>
+		/// <param name="autoAssertWhenAddingRules">When <code>true</code> it will validate the rule as they are added. Default is <code>false</code></param>
 		/// <returns></returns>
 		public RestResponse Response(bool autoAssertWhenAddingRules = false)
 		{

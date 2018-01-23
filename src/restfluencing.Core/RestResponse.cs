@@ -7,6 +7,9 @@ using RestFluencing.Helpers;
 
 namespace RestFluencing
 {
+	/// <summary>
+	/// Response object that allows adding assertion rules so they can be validated against the original Request response.
+	/// </summary>
 	public class RestResponse
 	{
 		private readonly IList<AssertionRule> _rules = new List<AssertionRule>();
@@ -14,8 +17,9 @@ namespace RestFluencing
 		/// <summary>
 		///     Constructor used for sequential execution of the tests (specflow style)
 		/// </summary>
-		/// <param name="request"></param>
-		/// <param name="context"></param>
+		/// <param name="request">Request that originated this response.</param>
+		/// <param name="context">Assertion context that this response will use</param>
+		/// <param name="autoAssertWhenAddingRule">When <code>true</code> it will validate the rule as they are added. Default is <code>false</code></param>
 		public RestResponse(RestRequest request, AssertionContext context, bool autoAssertWhenAddingRule)
 		{
 			Request = request ?? throw new ArgumentNullException(nameof(request), "No RestRequest has been provided.");
@@ -23,6 +27,9 @@ namespace RestFluencing
 			AutoAssertWhenAddingRule = autoAssertWhenAddingRule;
 		}
 
+		/// <summary>
+		/// Context to be used when asserting the rules.
+		/// </summary>
 		protected AssertionContext Context { get; }
 
 		/// <summary>

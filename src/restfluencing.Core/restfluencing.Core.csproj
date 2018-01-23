@@ -28,6 +28,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\RestFluencing.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -53,18 +54,21 @@
     <Compile Include="Assertion\ExceptionAssertion.cs" />
     <Compile Include="Assertion\Rules\AssertFailureRule.cs" />
     <Compile Include="Assertion\Rules\BlankResponseAssertionRule.cs" />
+    <Compile Include="Assertion\Rules\DynamicExpressionAssertionRule.cs" />
     <Compile Include="Assertion\Rules\ExpressionAssertionRule.cs" />
     <Compile Include="Assertion\IAssertion.cs" />
     <Compile Include="Assertion\Rules\AssertionRule.cs" />
+    <Compile Include="Assertion\Rules\HeaderAssertRule.cs" />
+    <Compile Include="Assertion\Rules\HeaderKeyRule.cs" />
     <Compile Include="Assertion\Rules\HeaderRule.cs" />
     <Compile Include="Assertion\Rules\HttpStatusRule.cs" />
     <Compile Include="Assertion\Rules\NotBlankResponseAssertionRule.cs" />
     <Compile Include="Client\ApiClientRequest.cs" />
+    <Compile Include="Client\ApiClientResponse.cs" />
     <Compile Include="Client\HttpClientWrapper\HttpApiClientBuilder.cs" />
     <Compile Include="Client\HttpClientWrapper\HttpApiClientSetupExtensions.cs" />
     <Compile Include="Client\HttpClientWrapper\HttpClient.cs" />
     <Compile Include="Client\IApiClient.cs" />
-    <Compile Include="Client\IApiClientOptions.cs" />
     <Compile Include="Client\IApiClientRequest.cs" />
     <Compile Include="Client\IApiClientResponse.cs" />
     <Compile Include="Client\IClientBuilder.cs" />
@@ -89,6 +93,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="RestFluencing.Core.nuspec">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

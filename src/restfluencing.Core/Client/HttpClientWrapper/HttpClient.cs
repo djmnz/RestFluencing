@@ -9,9 +9,17 @@ using RestFluencing.Helpers;
 
 namespace RestFluencing.Client.HttpApiClient
 {
+	/// <summary>
+	/// Standard API client that wraps the .Net HttpClient
+	/// </summary>
 	public class HttpApiClient : IApiClient
 	{
 
+		/// <summary>
+		/// Executes the request and creates an response object
+		/// </summary>
+		/// <param name="request"></param>
+		/// <returns></returns>
 		public IApiClientResponse ExecuteRequest(IApiClientRequest request)
 		{
 			using (HttpClient client = new HttpClient())
@@ -60,6 +68,9 @@ namespace RestFluencing.Client.HttpApiClient
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Dispose()
 		{
 		}

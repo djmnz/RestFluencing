@@ -5,6 +5,7 @@ namespace RestFluencing
 	/// </summary>
 	public enum HttpVerb
 	{
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 		Unknown = -1,
 		Get = 1,
 		Post,
@@ -15,5 +16,6 @@ namespace RestFluencing
 		Options,
 		Trace,
 		Connect
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 	}
 }

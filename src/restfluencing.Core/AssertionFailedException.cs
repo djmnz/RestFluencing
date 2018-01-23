@@ -11,24 +11,29 @@ namespace RestFluencing
 	/// </summary>
 	public class AssertionFailedException : Exception
 	{
+		/// <summary>
+		/// Result of the assertion that raised this exception
+		/// </summary>
 		public ExecutionResult Result { get; }
 
-		public AssertionFailedException(string message) : base(message)
-		{
-		}
 
-		public AssertionFailedException(string message, Exception innerException) : base(message, innerException)
-		{
-		}
-
+		/// <summary>
+		/// Constructor that includes a custom message to be appended with the results.
+		/// </summary>
+		/// <param name="message"></param>
+		/// <param name="result"></param>
 		public AssertionFailedException(string message, ExecutionResult result) : base($"{message} {GetFullMessage(result)}")
 		{
-			Result = result;
+			Result = result ?? throw new ArgumentNullException(nameof(result));
 		}
 
+		/// <summary>
+		/// Constructor that generates a message for the result sent through.
+		/// </summary>
+		/// <param name="result"></param>
 		public AssertionFailedException(ExecutionResult result) : base(GetFullMessage(result))
 		{
-			Result = result;
+			Result = result ?? throw new ArgumentNullException(nameof(result));
 		}
 
 		internal static string GetFullMessage(ExecutionResult result)
