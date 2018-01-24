@@ -2,6 +2,8 @@ namespace RestFluencing.Helpers
 {
 	internal static class DefaultValues
 	{
-		public static readonly int TimeOutInSeconds = 30;
+		internal static readonly int TimeOutInSeconds = 30;
+
+		internal const string AuthorisationHeaderKey = "Authorization";
 	}
 }

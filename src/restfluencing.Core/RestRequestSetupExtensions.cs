@@ -11,6 +11,8 @@ namespace RestFluencing
 	/// </summary>
 	public static class RestRequestSetupExtensions
 	{
+
+
 		/// <summary>
 		/// Adds a header into the request. 
 		/// </summary>
@@ -108,6 +110,96 @@ namespace RestFluencing
 			}
 
 			request.Request.Content = content;
+
+			return request;
+		}
+
+		/// <summary>
+		/// Removes the specified header key from the request.
+		/// </summary>
+		/// <param name="request"></param>
+		/// <param name="headerKeyToRemove">Header name to remove all values</param>
+		/// <returns></returns>
+		public static RestRequest WithoutHeader(this RestRequest request, string headerKeyToRemove)
+		{
+			if (request == null)
+			{
+				throw new ArgumentNullException(nameof(request));
+			}
+
+			if (headerKeyToRemove == null)
+			{
+				throw new ArgumentNullException(nameof(headerKeyToRemove));
+			}
+
+			if (request.Request.Headers.ContainsKey(headerKeyToRemove))
+			{
+				request.Request.Headers.Remove(headerKeyToRemove);
+			}
+
+			return request;
+		}
+
+		/// <summary>
+		/// Sets up a custom authorisation header. You need to fill the value of the header.
+		/// </summary>
+		/// <param name="request"></param>
+		/// <param name="authorisationHeaderValue">Value to be given as authorisation. This extension does not add any values to the one provided.</param>
+		/// <returns></returns>
+		public static RestRequest WithAuthorization(this RestRequest request, string authorisationHeaderValue)
+		{
+			if (request == null)
+			{
+				throw new ArgumentNullException(nameof(request));
+			}
+
+			HeaderHelper.AddHeader(request.Request.Headers, DefaultValues.AuthorisationHeaderKey, authorisationHeaderValue, true);
+			return request;
+		}
+
+		/// <summary>
+		/// Sets up a bearer token authorisation header.
+		/// </summary>
+		/// <param name="request"></param>
+		/// <param name="bearerToken">Token to be appended to the header value.</param>
+		/// <returns></returns>
+		public static RestRequest WithBearerAuthorization(this RestRequest request, string bearerToken)
+		{
+			if (request == null)
+			{
+				throw new ArgumentNullException(nameof(request));
+			}
+
+			if (bearerToken == null)
+			{
+				throw new ArgumentNullException(nameof(bearerToken));
+			}
+
+			request.WithAuthorization($"Bearer {bearerToken}");
+
+			return request;
+		}
+		/// <summary>
+		/// Sets up a bearer token authorisation header.
+		/// </summary>
+		/// <param name="request"></param>
+		/// <param name="username">Username to generate the basic header authorization</param>
+		/// <param name="password">Password to generate the basic header authorization</param>
+		/// <returns></returns>
+		public static RestRequest WithBasicAuthorization(this RestRequest request, string username, string password)
+		{
+			if (request == null)
+			{
+				throw new ArgumentNullException(nameof(request));
+			}
+
+			if (username == null)
+			{
+				throw new ArgumentNullException(nameof(username));
+			}
+
+
+			request.WithAuthorization($"Basic {HeaderHelper.BasicAuthorizationHeaderValue(username, password)}");
 
 			return request;
 		}

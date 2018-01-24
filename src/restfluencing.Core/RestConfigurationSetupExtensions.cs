@@ -64,5 +64,71 @@ namespace RestFluencing
 			HeaderHelper.AddHeader(config.RequestDefaults.Headers, headerKey, headerValue, overrideExistingValue);
 			return config;
 		}
+
+		/// <summary>
+		/// Sets up a custom authorisation header. You need to fill the value of the header.
+		/// </summary>
+		/// <param name="config"></param>
+		/// <param name="authorisationHeaderValue">Value to be given as authorisation. This extension does not add any values to the one provided.</param>
+		/// <returns></returns>
+		public static RestConfiguration WithAuthorization(this RestConfiguration config, string authorisationHeaderValue)
+		{
+			if (config == null)
+			{
+				throw new ArgumentNullException(nameof(config));
+			}
+
+			HeaderHelper.AddHeader(config.RequestDefaults.Headers, DefaultValues.AuthorisationHeaderKey, authorisationHeaderValue, true);
+			return config;
+		}
+
+		/// <summary>
+		/// Sets up a bearer token authorisation header.
+		/// </summary>
+		/// <param name="config"></param>
+		/// <param name="bearerToken">Token to be appended to the header value.</param>
+		/// <returns></returns>
+		public static RestConfiguration WithBearerAuthorization(this RestConfiguration config, string bearerToken)
+		{
+			if (config == null)
+			{
+				throw new ArgumentNullException(nameof(config));
+			}
+
+			if (bearerToken == null)
+			{
+				throw new ArgumentNullException(nameof(bearerToken));
+			}
+
+			config.WithAuthorization($"Bearer {bearerToken}");
+
+			return config;
+		}
+		/// <summary>
+		/// Sets up a bearer token authorisation header.
+		/// </summary>
+		/// <param name="config"></param>
+		/// <param name="username">Username to generate the basic header authorization</param>
+		/// <param name="password">Password to generate the basic header authorization</param>
+		/// <returns></returns>
+		public static RestConfiguration WithBasicAuthorization(this RestConfiguration config, string username, string password)
+		{
+			if (config == null)
+			{
+				throw new ArgumentNullException(nameof(config));
+			}
+
+			if (username == null)
+			{
+				throw new ArgumentNullException(nameof(username));
+			}
+
+
+			config.WithAuthorization($"Basic {HeaderHelper.BasicAuthorizationHeaderValue(username, password)}");
+
+			return config;
+		}
+
+
 	}
 }

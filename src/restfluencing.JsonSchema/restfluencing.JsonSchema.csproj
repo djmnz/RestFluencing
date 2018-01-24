@@ -60,7 +60,9 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="RestFluencing.JsonSchema.nuspec" />
+    <None Include="RestFluencing.JsonSchema.nuspec">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\restfluencing.Core\RestFluencing.Core.csproj">
