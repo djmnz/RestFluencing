@@ -1,9 +1,17 @@
 # RestFluencing
-# Under Construction
 
 RestFluencing is a .Net framework for helping writing API Tests in a fluent-style.
 
 It abstracts the creation of network requests and the assertion of its response.
+
+# Current state
+
+Currently used in the Integration Test environment at https://www.starnow.com/ to test their internal Rest APIs.
+
+RestFluencing API is stable and functional, low chance of introducing breaking changes.
+
+Looking for community feedback for closing version the version 0.x as 1.0.
+
 
 # Getting started
 
@@ -49,6 +57,7 @@ _configuration.Get("/users/defunkt")
 When invoking `RestConfiguration.JsonDefault()` it gives you a configuration instance with the following defaults:
 
 **Headers**: 
+
 `Content-Type: application/json`
 
 `Accept: application/json`
@@ -62,6 +71,43 @@ When invoking `RestConfiguration.JsonDefault()` it gives you a configuration ins
 
 
 # Asserting Response
+
+`https://api.github.com/users/defunkt`
+
+``` json
+{
+  "login": "defunkt",
+  "id": 2,
+  "avatar_url": "https://avatars0.githubusercontent.com/u/2?v=4",
+  "gravatar_id": "",
+  "url": "https://api.github.com/users/defunkt",
+  "html_url": "https://github.com/defunkt",
+  "followers_url": "https://api.github.com/users/defunkt/followers",
+  "following_url": "https://api.github.com/users/defunkt/following{/other_user}",
+  "gists_url": "https://api.github.com/users/defunkt/gists{/gist_id}",
+  "starred_url": "https://api.github.com/users/defunkt/starred{/owner}{/repo}",
+  "subscriptions_url": "https://api.github.com/users/defunkt/subscriptions",
+  "organizations_url": "https://api.github.com/users/defunkt/orgs",
+  "repos_url": "https://api.github.com/users/defunkt/repos",
+  "events_url": "https://api.github.com/users/defunkt/events{/privacy}",
+  "received_events_url": "https://api.github.com/users/defunkt/received_events",
+  "type": "User",
+  "site_admin": true,
+  "name": "Chris Wanstrath",
+  "company": "@github ",
+  "blog": "http://chriswanstrath.com/",
+  "location": "San Francisco",
+  "email": null,
+  "hireable": true,
+  "bio": "🍔 ",
+  "public_repos": 107,
+  "public_gists": 273,
+  "followers": 16673,
+  "following": 208,
+  "created_at": "2007-10-20T05:24:19Z",
+  "updated_at": "2018-01-11T07:04:23Z"
+}
+```
 
 ## As Dynamic Content
 
@@ -94,6 +140,8 @@ _configuration.Get("/users/defunkt")
 	.Assert();
 ```
 
+
+
 ## Asserting Header
 
 **Test:**
@@ -101,8 +149,8 @@ _configuration.Get("/users/defunkt")
 ``` C#
 _configuration.Get("/users/defunkt")
 	.Response()
-	.Returns<GitHubUser>(c => c.login == "defunkt")
-	.Returns<GitHubUser>(c => c.id == 2)
+	.HasHeader("Content-Type") // this ensures that the header exists
+	.HasHeaderValue("Content-Type", "application/json; charset=utf-8") // this asserts that the header exists AND has the value
 	.Assert();
 ```
 
@@ -165,3 +213,38 @@ _configuration.Get("/users/defunkt")
 ```
 
 And apply any relevant attribute to your model.
+
+# Authenticated Requests
+
+RestFluencing has a few healper methods to assist adding an authorization header.
+
+Note that you will need to implement yourselves how to retrieve the tokens or provide proper values to the header. i.e.  you may want to connect to a database or send an oauth request.
+
+## Bearer
+
+``` C#
+request.WithBearerAuthorization("TOKEN");
+```
+
+## Basic
+
+``` C#
+request.WithBasicAuthorization("USERNAME","PASSWORD");
+```
+
+## Custom
+
+``` C#
+request.WithAuthorization("AUTHORIZATION HEADER VALUE");
+```
+
+## Example
+
+``` C#
+_configuration.Get("/user/following/defunkt")
+	.WithBasicAuthorization("<username>", "<password>")
+	.Response()
+	.ReturnsStatus(HttpStatusCode.NotFound)
+	.Assert();
+```
+
