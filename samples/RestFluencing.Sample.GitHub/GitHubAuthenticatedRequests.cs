@@ -26,6 +26,36 @@ namespace RestFluencing.Sample.GitHub
 				.Assert();
 		}
 
+		[TestMethod]
+		public void PutAuthenticatedData()
+		{
+			_configuration.Put("/repos/djmnz/RestFluencing/subscription")
+				.WithJsonBody(new
+				{
+					subscribed = true,
+					ignored = false
+
+				})
+				.Response()
+				.ReturnsStatus(HttpStatusCode.OK)
+				.ReturnsDynamic(r => r.subscribed == true, "Expected subsribed to be true")
+				.Assert();
+		}
+
+		[TestMethod]
+		public void PostWithStronglyTypedModel()
+		{
+			_configuration.Put("/repos/djmnz/RestFluencing/subscription")
+				.WithJsonBody(new GitHubSubscriptionModel()
+				{
+					subscribed = true,
+					ignored = false
+				})
+				.Response()
+				.ReturnsStatus(HttpStatusCode.OK)
+				.Returns<GitHubSubscriptionModel>(r => r.subscribed == true)
+				.Assert();
+		}
 
 	}
 }

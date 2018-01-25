@@ -65,6 +65,7 @@
     <Compile Include="GitHubAuthenticatedRequests.cs" />
     <Compile Include="GitHubCommonConfiguration.cs" />
     <Compile Include="GitHubGetRequests.cs" />
+    <Compile Include="GitHubSubscriptionModel.cs" />
     <Compile Include="GitHubUserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
