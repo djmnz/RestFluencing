@@ -15,6 +15,18 @@ Looking for community feedback for closing version the version 0.x as 1.0.
 
 # Getting started
 
+## Installing
+
+NuGet Package: https://www.nuget.org/packages/RestFluencing/
+
+Installing NuGet Package:
+
+```
+Install-Package RestFluencing
+```
+
+## First test
+
 ``` C#
 Rest.GetFromUrl("https://api.github.com/users/defunkt")
 	.WithHeader("User-Agent", "RestFluencing Sample")
