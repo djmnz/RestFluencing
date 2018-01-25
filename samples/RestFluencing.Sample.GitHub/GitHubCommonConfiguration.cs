@@ -32,8 +32,8 @@ namespace RestFluencing.Sample.GitHub
 		{
 			_configuration.Get("/users/defunkt")
 				.Response()
-				.Returns<GitHubUser>(c => c.login == "defunkt")
-				.Returns<GitHubUser>(c => c.id == 2)
+				.Returns<GitHubUserModel>(c => c.login == "defunkt")
+				.Returns<GitHubUserModel>(c => c.id == 2)
 				.Assert();
 		}
 
@@ -42,8 +42,8 @@ namespace RestFluencing.Sample.GitHub
 		{
 			_configuration.Get("/users/defunkt")
 				.Response()
-				.HasHeader("Content-Type") // alternatively you can look for a value:
-				.HasHeaderValue("Content-Type", "application/json; charset=utf-8")
+				.HasHeader("Content-Type") // this ensures that the header exists
+				.HasHeaderValue("Content-Type", "application/json; charset=utf-8") // this asserts that the header exists AND has the value
 				.Assert();
 		}
 
@@ -52,15 +52,8 @@ namespace RestFluencing.Sample.GitHub
 		{
 			_configuration.Get("/users/defunkt")
 				.Response()
-				.HasJsonSchema<GitHubUser>()
+				.HasJsonSchema<GitHubUserModel>()
 				.Assert();
 		}
 	}
-
-	public class GitHubUser
-	{
-		public int id { get; set; }
-		public string login { get; set; }
-	}
-
 }

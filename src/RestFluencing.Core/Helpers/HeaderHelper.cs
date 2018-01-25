@@ -31,5 +31,16 @@ namespace RestFluencing.Helpers
 
 		}
 
+		internal static string BasicAuthorizationHeaderValue(string username, string password)
+		{
+			if (username == null)
+			{
+				throw new ArgumentNullException(nameof(username));
+			}
+
+			return Convert.ToBase64String(
+				System.Text.Encoding.ASCII.GetBytes(
+					$"{username}:{password ?? string.Empty}"));
+		}
 	}
 }
