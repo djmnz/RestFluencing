@@ -121,7 +121,7 @@ When invoking `RestConfiguration.JsonDefault()` it gives you a configuration ins
 }
 ```
 
-## As Dynamic Content
+## Asserting As Dynamic Content
 
 ``` C#
 _configuration.Get("/users/defunkt")
@@ -131,7 +131,7 @@ _configuration.Get("/users/defunkt")
 	.Assert();
 ```
 
-## As From Strongly Typed Model
+## Asserting As From Strongly Typed Model
 
 **Model:**
 ``` C#
@@ -257,6 +257,39 @@ _configuration.Get("/user/following/defunkt")
 	.WithBasicAuthorization("<username>", "<password>")
 	.Response()
 	.ReturnsStatus(HttpStatusCode.NotFound)
+	.Assert();
+```
+
+# Submitting Content Data
+
+## Post/Put Dynamic Models
+
+``` C#
+_configuration.Put("/repos/djmnz/RestFluencing/subscription")
+	.WithJsonBody(new
+	{
+		subscribed = true,
+		ignored = false
+	})
+	.Response()
+	.ReturnsStatus(HttpStatusCode.OK)
+	.ReturnsDynamic(r => r.subscribed == true, "Expected subsribed to be true")
+	.Assert();
+```
+
+
+## Post/Put Strongly Typed Models
+
+``` C#
+_configuration.Put("/repos/djmnz/RestFluencing/subscription")
+	.WithJsonBody(new GitHubSubscriptionModel()
+	{
+		subscribed = true,
+		ignored = false
+	})
+	.Response()
+	.ReturnsStatus(HttpStatusCode.OK)
+	.Returns<GitHubSubscriptionModel>(r => r.subscribed == true)
 	.Assert();
 ```
 
