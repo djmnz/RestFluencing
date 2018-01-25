@@ -280,6 +280,18 @@ _configuration.Put("/repos/djmnz/RestFluencing/subscription")
 
 ## Post/Put Strongly Typed Models
 
+*Model*
+
+``` C#
+public class GitHubSubscriptionModel
+{
+	public bool subscribed { get; set; }
+	public bool ignored { get; set; }
+}
+```
+
+*Test*
+
 ``` C#
 _configuration.Put("/repos/djmnz/RestFluencing/subscription")
 	.WithJsonBody(new GitHubSubscriptionModel()
