@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("0.9.0.0")]
-[assembly: AssemblyFileVersion("0.9.0.0")]
+[assembly: AssemblyVersion("0.9.1.0")]
+[assembly: AssemblyFileVersion("0.9.1.0")]
 
 [assembly: AssemblyTitle("RestFluencing.JsonSchema")]
 [assembly: AssemblyDescription("Extension to RestFluencing to validate API models using JsonSchema. Allows you to write tests for Restful APIs and validating the returning model.")]
