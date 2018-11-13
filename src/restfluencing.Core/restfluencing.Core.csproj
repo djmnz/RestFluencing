@@ -55,6 +55,7 @@
     <Compile Include="Assertion\Rules\AssertFailureRule.cs" />
     <Compile Include="Assertion\Rules\BlankResponseAssertionRule.cs" />
     <Compile Include="Assertion\Rules\DynamicExpressionAssertionRule.cs" />
+    <Compile Include="Assertion\Rules\ActionRule.cs" />
     <Compile Include="Assertion\Rules\ExpressionAssertionRule.cs" />
     <Compile Include="Assertion\IAssertion.cs" />
     <Compile Include="Assertion\Rules\AssertionRule.cs" />

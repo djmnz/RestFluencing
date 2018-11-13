@@ -83,15 +83,32 @@ namespace RestFluencing.Assertion
 			return response;
 		}
 
-		/// <summary>
-		/// Asserts that the response content contains the expected value based on the type provided
-		/// </summary>
-		/// <typeparam name="T">Expected response Type</typeparam>
-		/// <param name="response"></param>
-		/// <param name="expression">Expression to validate</param>
-		/// <param name="errorReason">Explicit error message</param>
-		/// <returns></returns>
-		public static RestResponse Returns<T>(this RestResponse response, Expression<Func<T, bool>> expression, string errorReason)
+        /// <summary>
+        /// Allows an Action to be called on the response object.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="response"></param>
+        /// <param name="action">Action to call on the response object.</param>
+        /// <returns></returns>
+        public static RestResponse Action<T>(this RestResponse response, Action<T> action)
+        {
+            if (response == null)
+            {
+                throw new ArgumentNullException(nameof(response));
+            }
+            response.AddRule(new ActionRule<T>(action));
+            return response;
+        }
+
+        /// <summary>
+        /// Asserts that the response content contains the expected value based on the type provided
+        /// </summary>
+        /// <typeparam name="T">Expected response Type</typeparam>
+        /// <param name="response"></param>
+        /// <param name="expression">Expression to validate</param>
+        /// <param name="errorReason">Explicit error message</param>
+        /// <returns></returns>
+        public static RestResponse Returns<T>(this RestResponse response, Expression<Func<T, bool>> expression, string errorReason)
 		{
 			if (response == null)
 			{
