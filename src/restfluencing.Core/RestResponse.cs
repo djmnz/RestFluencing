@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RestFluencing.Assertion;
 using RestFluencing.Assertion.Rules;
+using RestFluencing.Client;
 using RestFluencing.Helpers;
 
 namespace RestFluencing
@@ -42,17 +43,21 @@ namespace RestFluencing
 		/// </summary>
 		public bool AutoAssertWhenAddingRule { get; }
 
-
 		/// <summary>
 		///     List of rules that are attached to this response.
 		/// </summary>
 		public IEnumerable<AssertionRule> Rules => _rules;
 
-		/// <summary>
-		///     Adds a rule to be asserted. If <code>AutoAssertWhenAddingRule</code> is <code>true</code> then will also assert the new rule.
-		/// </summary>
-		/// <param name="rule"></param>
-		public void AddRule(AssertionRule rule)
+        /// <summary>
+        ///     Returns the Response
+        /// </summary>
+        public IApiClientResponse Response => Context.Response;
+
+        /// <summary>
+        ///     Adds a rule to be asserted. If <code>AutoAssertWhenAddingRule</code> is <code>true</code> then will also assert the new rule.
+        /// </summary>
+        /// <param name="rule"></param>
+        public void AddRule(AssertionRule rule)
 		{
 			_rules.Add(rule);
 
