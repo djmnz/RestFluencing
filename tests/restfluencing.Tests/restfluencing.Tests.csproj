@@ -82,6 +82,7 @@
     <Compile Include="ExpressionAssertionRule.cs" />
     <Compile Include="Factories.cs" />
     <Compile Include="BlankResponseRule.cs" />
+    <Compile Include="InlineAssertionRuleTests.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Promo.cs" />
     <Compile Include="HasJsonSchemaRule.cs" />

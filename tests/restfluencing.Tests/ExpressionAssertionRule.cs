@@ -41,7 +41,7 @@ namespace RestFluencing.Tests
 	    {
 		    Rest.Get("/product/apple", _configuration)
 			    .Response()
-			    .Returns<Product>(x => x.Name == "Apple")
+			    .ReturnsDynamic(x => x.Name == "Apple", "Name does not match")
 			    .Execute()
 			    .ShouldPass();
 	    }
@@ -51,7 +51,7 @@ namespace RestFluencing.Tests
 	    {
 		    Rest.Get("/product/apple", _configuration)
 			    .Response()
-			    .Returns<Product>(x => x.Name == "NotApple")
+			    .ReturnsDynamic(x => x.Name == "NotApple", "Name does not match")
 			    .Execute()
 			    .ShouldFail();
 	    }
@@ -75,6 +75,7 @@ namespace RestFluencing.Tests
 	            .Execute()
                 .ShouldFail();
         }
+
 
     }
 }

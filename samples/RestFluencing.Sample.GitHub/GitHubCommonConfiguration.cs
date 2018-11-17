@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RestFluencing.Assertion;
 using RestFluencing.JsonSchema;
 
@@ -15,7 +16,11 @@ namespace RestFluencing.Sample.GitHub
 			_configuration = RestConfiguration.JsonDefault();
 			_configuration.WithHeader("User-Agent", "RestFluencing Sample");
 			_configuration.WithBaseUrl("https://api.github.com/");
+
+			ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 		}
+
+
 
 		[TestMethod]
 		public void AssertDynamicResponse()

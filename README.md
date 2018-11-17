@@ -12,6 +12,8 @@ RestFluencing API is stable and functional, low chance of introducing breaking c
 
 Looking for community feedback for closing version the version 0.x as 1.0.
 
+![Build Status](https://ci.appveyor.com/api/projects/status/github/djmnz/restfluencing?branch=feature/customvalidation&svg=true)
+
 
 # Getting started
 
@@ -150,6 +152,61 @@ _configuration.Get("/users/defunkt")
 	.Returns<GitHubUser>(c => c.login == "defunkt")
 	.Returns<GitHubUser>(c => c.id == 2)
 	.Assert();
+```
+
+## Asserting Using Custom Function
+
+**Model:**
+``` C#
+public class GitHubUser
+{
+	public int id { get; set; }
+	public string login { get; set; }
+}
+```
+
+**Test:**
+
+``` C#
+_configuration.Get("/users/defunkt")
+	.Response()
+	.ReturnsModel<GitHubUser>(c => {c.login == "defunkt")
+	.ReturnsModel<GitHubUser>(c => c.id == 2)
+	.Assert();
+```
+
+## Getting the response deserialized object
+
+We are not a Rest client, but an assertion framework. There certain circumstances or tests that there may be a need to retrieve the object to be used by the next test.
+
+Below is an example of how you can leverage the custom function assertion to do so.
+
+**Model:**
+``` C#
+public class GitHubUser
+{
+	public int id { get; set; }
+	public string login { get; set; }
+}
+```
+
+**Test:**
+
+``` C#
+
+GitHubUserModel user = null;
+Rest.GetFromUrl("https://api.github.com/users/defunkt")
+	.WithHeader("User-Agent", "RestFluencing Sample")
+	.Response()
+	.ReturnsModel<GitHubUserModel>(model =>
+	{
+		user = model;
+		return true;
+	}, string.Empty)
+	.Assert();
+
+Assert.IsNotNull(user);
+
 ```
 
 
