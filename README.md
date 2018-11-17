@@ -209,7 +209,49 @@ Assert.IsNotNull(user);
 
 ```
 
+## Intercepting Request before submitted to client
 
+``` C#
+
+// Arrange
+bool callFromConfig = false;
+var config = RestConfigurationHelper.Default();
+config.BeforeRequest(context => { callFromConfig = true; });
+
+// Act
+config.Get("/null").Response().Assert();
+
+// Assert
+Assert.IsTrue(callFromConfig);
+
+```
+
+
+## Intercepting Response before it is Asserted
+
+*Note*: If need the deserialize the response to a model, see the example above for `ReturnsModel`.
+
+``` C#
+string contentFromConfig = null;
+string contentFromRequest = null;
+// Arrange
+var config = RestConfigurationHelper.Default()
+	.AfterRequest(context => { contentFromConfig = context.Response.Content; });
+
+var request = config.Get("/product/apple")
+	.AfterRequest(context => { contentFromRequest = context.Response.Content; });
+
+// Act
+request.Response().Assert();
+
+// Assert
+Assert.IsNotNull(contentFromConfig);
+Assert.IsNotNull(contentFromRequest);
+
+Assert.IsTrue(contentFromConfig.Contains("Apple"));
+Assert.IsTrue(contentFromRequest.Contains("Apple"));
+
+```
 
 ## Asserting Header
 
