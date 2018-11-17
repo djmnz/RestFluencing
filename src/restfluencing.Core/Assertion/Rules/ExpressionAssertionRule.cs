@@ -22,7 +22,8 @@ namespace RestFluencing.Assertion.Rules
 		///     Minimum requirements for the expression assertion rule
 		/// </summary>
 		/// <param name="expression"></param>
-		/// <param name="error"></param>
+		/// <param name="error">Error message to display when assertion fails.
+		/// {0} is the expression body.</param>
 		public ExpressionAssertionRule(Expression<Func<T, bool>> expression, string error = _defaultError) :
 			base("Expression")
 		{

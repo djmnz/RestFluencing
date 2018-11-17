@@ -87,6 +87,7 @@
     <Compile Include="HasJsonSchemaRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResponseAssertTests.cs" />
+    <Compile Include="RestResponseWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\restfluencing.Core\RestFluencing.Core.csproj">

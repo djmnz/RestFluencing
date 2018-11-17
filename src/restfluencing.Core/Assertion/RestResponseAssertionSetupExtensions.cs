@@ -18,7 +18,7 @@ namespace RestFluencing.Assertion
 		/// <param name="response"></param>
 		/// <param name="code">Expected status code</param>
 		/// <returns></returns>
-		public static RestResponse ReturnsStatus(this RestResponse response, HttpStatusCode code)
+		public static IRestResponse ReturnsStatus(this IRestResponse response, HttpStatusCode code)
 		{
 			if (response == null)
 			{
@@ -36,7 +36,7 @@ namespace RestFluencing.Assertion
 		/// <param name="response"></param>
 		/// <param name="headerKey">Expected header key</param>
 		/// <returns></returns>
-		public static RestResponse HasHeader(this RestResponse response, string headerKey)
+		public static IRestResponse HasHeader(this IRestResponse response, string headerKey)
 		{
 			if (response == null)
 			{
@@ -55,7 +55,7 @@ namespace RestFluencing.Assertion
 		/// <param name="headerKey">Expected header key</param>
 		/// <param name="headerValue">Expected header value</param>
 		/// <returns></returns>
-		public static RestResponse HasHeaderValue(this RestResponse response, string headerKey, string headerValue)
+		public static IRestResponse HasHeaderValue(this IRestResponse response, string headerKey, string headerValue)
 		{
 			if (response == null)
 			{
@@ -73,7 +73,7 @@ namespace RestFluencing.Assertion
 		/// <param name="assertionRule">Expression rule</param>
 		/// <param name="message">Explicit error message provided when the assertion rule fails.</param>
 		/// <returns></returns>
-		public static RestResponse HasHeader(this RestResponse response, string headerKey, Expression<Func<IEnumerable<string>, bool>> assertionRule, string message)
+		public static IRestResponse HasHeader(this IRestResponse response, string headerKey, Expression<Func<IEnumerable<string>, bool>> assertionRule, string message)
 		{
 			if (response == null)
 			{
@@ -83,23 +83,7 @@ namespace RestFluencing.Assertion
 			return response;
 		}
 
-		/// <summary>
-		/// Asserts that the response content contains the expected value based on the type provided
-		/// </summary>
-		/// <typeparam name="T">Expected response Type</typeparam>
-		/// <param name="response"></param>
-		/// <param name="expression">Expression to validate</param>
-		/// <param name="errorReason">Explicit error message</param>
-		/// <returns></returns>
-		public static RestResponse Returns<T>(this RestResponse response, Expression<Func<T, bool>> expression, string errorReason)
-		{
-			if (response == null)
-			{
-				throw new ArgumentNullException(nameof(response));
-			}
-			response.AddRule(new ExpressionAssertionRule<T>(expression, errorReason));
-			return response;
-		}
+
 
 		/// <summary>
 		/// Verifies that the response body contains a value but based on a dynamic type. For explicit clarity the error reason must be provided.
@@ -108,7 +92,7 @@ namespace RestFluencing.Assertion
 		/// <param name="expression">Dynamic expression to be validated</param>
 		/// <param name="errorReason">Explicit error</param>
 		/// <returns></returns>
-		public static RestResponse ReturnsDynamic(this RestResponse response, Func<dynamic, bool> expression, string errorReason)
+		public static IRestResponse ReturnsDynamic(this IRestResponse response, Func<dynamic, bool> expression, string errorReason)
 		{
 			if (response == null)
 			{
@@ -125,7 +109,7 @@ namespace RestFluencing.Assertion
 		/// <param name="response">Response to add the new assertion rule</param>
 		/// <param name="expression">Expression to validate</param>
 		/// <returns></returns>
-		public static RestResponse Returns<T>(this RestResponse response, Expression<Func<T, bool>> expression)
+		public static IRestResponse Returns<T>(this IRestResponse response, Expression<Func<T, bool>> expression)
 		{
 			if (response == null)
 			{
@@ -136,12 +120,66 @@ namespace RestFluencing.Assertion
 		}
 
 		/// <summary>
+		/// Verifies that the intended behaviour expressed on the expression is met
+		/// </summary>
+		/// <typeparam name="T">Type to deserialise the response body as</typeparam>
+		/// <param name="response">Response to add the new assertion rule</param>
+		/// <param name="lambda">Expression to validate</param>
+		/// <param name="reason">Explain the reason why the assertion failed.</param>
+		/// <returns></returns>
+		public static IRestResponse ReturnsModel<T>(this IRestResponse response, Func<T, bool> lambda, string reason)
+		{
+			if (response == null)
+			{
+				throw new ArgumentNullException(nameof(response));
+			}
+			response.AddRule(new InlineAssertionRule<T>(lambda, reason));
+			return response;
+		}
+
+		/// <summary>
+		/// Asserts that the response content contains the expected value based on the type provided
+		/// </summary>
+		/// <typeparam name="T">Expected response Type</typeparam>
+		/// <param name="response"></param>
+		/// <param name="expression">Expression to validate</param>
+		/// <param name="errorReason">Explicit error message</param>
+		/// <returns></returns>
+		public static IRestResponse Returns<T>(this IRestResponse response, Expression<Func<T, bool>> expression, string errorReason)
+		{
+			if (response == null)
+			{
+				throw new ArgumentNullException(nameof(response));
+			}
+			response.AddRule(new ExpressionAssertionRule<T>(expression, errorReason));
+			return response;
+		}
+
+		/// <summary>
+		/// Verifies that the intended behaviour expressed on the expression is met
+		/// </summary>
+		/// <typeparam name="T">Type to deserialise the response body as</typeparam>
+		/// <param name="response">Response to add the new assertion rule</param>
+		/// <param name="expression">Expression to validate</param>
+		/// <param name="reason">Explain the reason why the assertion failed with additional details about the model if required.</param>
+		/// <returns></returns>
+		public static IRestResponse Returns<T>(this IRestResponse response, Func<T, bool> expression, Func<T, string> reason)
+		{
+			if (response == null)
+			{
+				throw new ArgumentNullException(nameof(response));
+			}
+			response.AddRule(new InlineAssertionRule<T>(expression, reason));
+			return response;
+		}
+
+		/// <summary>
 		/// Verifies that the response has an empty body.
 		/// </summary>
 		/// <param name="response">Response to add the new assertion rule</param>
 		/// <param name="errorReason">Reason why it should be empty</param>
 		/// <returns></returns>
-		public static RestResponse ReturnsEmptyContent(this RestResponse response, string errorReason)
+		public static IRestResponse ReturnsEmptyContent(this IRestResponse response, string errorReason)
 		{
 			if (response == null)
 			{
@@ -157,7 +195,7 @@ namespace RestFluencing.Assertion
 		/// </summary>
 		/// <param name="response">Response to add the new assertion rule</param>
 		/// <returns></returns>
-		public static RestResponse ReturnsEmptyContent(this RestResponse response)
+		public static IRestResponse ReturnsEmptyContent(this IRestResponse response)
 		{
 			if (response == null)
 			{
@@ -172,7 +210,7 @@ namespace RestFluencing.Assertion
 		/// <param name="response">Response to add the new assertion rule</param>
 		/// <param name="errorReason">Reason why it should have content</param>
 		/// <returns></returns>
-		public static RestResponse ReturnsContent(this RestResponse response, string errorReason)
+		public static IRestResponse ReturnsContent(this IRestResponse response, string errorReason)
 		{
 			if (response == null)
 			{
@@ -187,7 +225,7 @@ namespace RestFluencing.Assertion
 		/// </summary>
 		/// <param name="response">Response to add the new assertion rule</param>
 		/// <returns></returns>
-		public static RestResponse ReturnsContent(this RestResponse response)
+		public static IRestResponse ReturnsContent(this IRestResponse response)
 		{
 			if (response == null)
 			{
