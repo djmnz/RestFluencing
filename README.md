@@ -177,7 +177,7 @@ _configuration.Get("/users/defunkt")
 
 ## Getting the response deserialized object
 
-We are not a Rest client, but an assertion framework. There certain circumstances or tests that there may be a need to retrieve the object to be used by the next test.
+We are not a Rest client, but an assertion framework. However we understand that in certain circumstances that there may be a need to retrieve the object to be used by the next test.
 
 Below is an example of how you can leverage the custom function assertion to do so.
 

@@ -75,6 +75,7 @@
     <Compile Include="Client\IClientBuilder.cs" />
     <Compile Include="Client\IResponseDeserialiser.cs" />
     <Compile Include="Client\JsonResponseDeserialiser.cs" />
+    <Compile Include="Client\RequestContext.cs" />
     <Compile Include="ExecutionResult.cs" />
     <Compile Include="Helpers\ConcurrencyExtensions.cs" />
     <Compile Include="Helpers\DefaultValues.cs" />

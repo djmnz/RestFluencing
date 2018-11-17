@@ -77,6 +77,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="AfterEventsOnRequestTests.cs" />
+    <Compile Include="BeforeEventsOnRequestTests.cs" />
     <Compile Include="Clients\TestApiClient.cs" />
     <Compile Include="Clients\TestApiFactory.cs" />
     <Compile Include="ExpressionAssertionRule.cs" />
@@ -88,6 +90,7 @@
     <Compile Include="HasJsonSchemaRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResponseAssertTests.cs" />
+    <Compile Include="RestConfigurationHelper.cs" />
     <Compile Include="RestResponseWrapper.cs" />
   </ItemGroup>
   <ItemGroup>

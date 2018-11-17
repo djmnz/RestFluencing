@@ -15,18 +15,11 @@ namespace RestFluencing.Tests
         [TestInitialize]
         public void Setup()
         {
-            // Setup Defaults
-            var restDefaults = RestConfiguration.JsonDefault();
-            restDefaults.WithBaseUrl("http://test.starnow.local/");
-            _configuration = restDefaults;
+	        _configuration = RestConfigurationHelper.Default();
+	        _factory = _configuration.ClientFactory as TestApiFactory;
+		}
 
-            // Setup Factory
-            var factory = Factories.Default();
-            restDefaults.ClientFactory = factory;
-            _factory = factory as TestApiFactory;
-        }
-
-	    [TestMethod]
+		[TestMethod]
 	    public void WhenProperty_Equals_ShouldPass()
 	    {
 		    Rest.Get("/product/apple", _configuration)
