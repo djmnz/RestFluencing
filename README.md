@@ -12,7 +12,7 @@ RestFluencing API is stable and functional, low chance of introducing breaking c
 
 Looking for community feedback for closing version the version 0.x as 1.0.
 
-![Build Status](https://ci.appveyor.com/api/projects/status/github/djmnz/restfluencing?branch=feature/customvalidation&svg=true)
+![Build Status](https://ci.appveyor.com/api/projects/status/github/djmnz/restfluencing?branch=master&svg=true)
 
 
 # Getting started
