@@ -27,13 +27,15 @@ namespace RestFluencing.Tests.Clients
 				return new ApiClientResponse()
 				{
 					Content = "",
-					StatusCode = HttpStatusCode.OK
+					StatusCode = HttpStatusCode.OK,
+					Headers = new Dictionary<string, IEnumerable<string>>()
 				};
 			}
 			return new ApiClientResponse()
 			{
 				Content = JsonConvert.SerializeObject(Responses[request.Uri.AbsolutePath]),
-				StatusCode = HttpStatusCode.OK
+				StatusCode = HttpStatusCode.OK,
+				Headers = new Dictionary<string, IEnumerable<string>>()
 			};
 		}
 	}

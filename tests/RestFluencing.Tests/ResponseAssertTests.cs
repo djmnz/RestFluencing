@@ -17,18 +17,10 @@ namespace RestFluencing.Tests
 		[TestInitialize]
 		public void Setup()
 		{
-			// Setup Defaults
-			var restDefaults = RestConfiguration.JsonDefault();
-			restDefaults.WithBaseUrl("http://test.starnow.local/");
-			_configuration = restDefaults;
 			_assertion = new Mock<IAssertion>();
+			_configuration = RestConfigurationHelper.Default();
 			_configuration.Assertion = _assertion.Object;
-
-			// Setup Factory
-			var factory = Factories.Default();
-			restDefaults.ClientFactory = factory;
-			_factory = factory as TestApiFactory;
-
+			_factory = _configuration.ClientFactory as TestApiFactory;
 		}
 
 

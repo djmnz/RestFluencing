@@ -45,6 +45,9 @@ namespace RestFluencing
 		/// </summary>
 		public IAssertion Assertion { get; set; }
 
+		internal BeforeRequestDelegate BeforeRequestEvent { get; set; }
+		internal AfterRequestDelegate AfterRequestEvent { get; set; }
+
 		/// <summary>
 		///     Creates the request based on the request that we have been manipulating with the extensions
 		///     and set the defaults where appropriate.
@@ -132,7 +135,20 @@ namespace RestFluencing
 					Client = client,
 					ResponseDeserialiser = responseDeserialiser
 				};
+
+				if (BeforeRequestEvent != null || Configuration.BeforeRequestEvent != null)
+				{
+					var requestContext = new RequestContext(context);
+
+					Configuration.BeforeRequestEvent?.Invoke(requestContext);
+
+					BeforeRequestEvent?.Invoke(requestContext);
+				}
+
 				context.Response = client.ExecuteRequest(context.Request);
+
+				Configuration.AfterRequestEvent?.Invoke(context);
+				AfterRequestEvent?.Invoke(context);
 
 				var response = new RestResponse(this, context, autoAssertWhenAddingRules);
 				return response;

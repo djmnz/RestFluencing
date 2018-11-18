@@ -130,5 +130,30 @@ namespace RestFluencing
 		}
 
 
+		/// <summary>
+		/// Adds an BeforeRequest Event against this request. Note that you can add more than one event. Events from the Configuration are executed first.
+		/// </summary>
+		/// <param name="config"></param>
+		/// <param name="beforeRequest"></param>
+		/// <returns></returns>
+		public static RestConfiguration BeforeRequest(this RestConfiguration config, BeforeRequestDelegate beforeRequest)
+		{
+			config.BeforeRequestEvent += beforeRequest;
+			return config;
+		}
+
+		/// <summary>
+		/// Adds an BeforeRequest Event against this request. Note that you can add more than one event. Events from the configuration are executed first.
+		/// </summary>
+		/// <param name="config"></param>
+		/// <param name="afterRequest"></param>
+		/// <returns></returns>
+		public static RestConfiguration AfterRequest(this RestConfiguration config, AfterRequestDelegate afterRequest)
+		{
+			config.AfterRequestEvent += afterRequest;
+			return config;
+		}
+
+
 	}
 }

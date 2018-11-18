@@ -15,18 +15,11 @@ namespace RestFluencing.Tests
         [TestInitialize]
         public void Setup()
         {
-            // Setup Defaults
-            var restDefaults = RestConfiguration.JsonDefault();
-            restDefaults.WithBaseUrl("http://test.starnow.local/");
-            _configuration = restDefaults;
+	        _configuration = RestConfigurationHelper.Default();
+	        _factory = _configuration.ClientFactory as TestApiFactory;
+		}
 
-            // Setup Factory
-            var factory = Factories.Default();
-            restDefaults.ClientFactory = factory;
-            _factory = factory as TestApiFactory;
-        }
-
-	    [TestMethod]
+		[TestMethod]
 	    public void WhenProperty_Equals_ShouldPass()
 	    {
 		    Rest.Get("/product/apple", _configuration)
@@ -41,7 +34,7 @@ namespace RestFluencing.Tests
 	    {
 		    Rest.Get("/product/apple", _configuration)
 			    .Response()
-			    .Returns<Product>(x => x.Name == "Apple")
+			    .ReturnsDynamic(x => x.Name == "Apple", "Name does not match")
 			    .Execute()
 			    .ShouldPass();
 	    }
@@ -51,7 +44,7 @@ namespace RestFluencing.Tests
 	    {
 		    Rest.Get("/product/apple", _configuration)
 			    .Response()
-			    .Returns<Product>(x => x.Name == "NotApple")
+			    .ReturnsDynamic(x => x.Name == "NotApple", "Name does not match")
 			    .Execute()
 			    .ShouldFail();
 	    }
@@ -75,6 +68,7 @@ namespace RestFluencing.Tests
 	            .Execute()
                 .ShouldFail();
         }
+
 
     }
 }
