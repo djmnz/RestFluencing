@@ -62,6 +62,7 @@
     <Compile Include="Assertion\Rules\HeaderKeyRule.cs" />
     <Compile Include="Assertion\Rules\HeaderRule.cs" />
     <Compile Include="Assertion\Rules\HttpStatusRule.cs" />
+    <Compile Include="Assertion\Rules\InlineAssertionRule.cs" />
     <Compile Include="Assertion\Rules\NotBlankResponseAssertionRule.cs" />
     <Compile Include="Client\ApiClientRequest.cs" />
     <Compile Include="Client\ApiClientResponse.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Client\IClientBuilder.cs" />
     <Compile Include="Client\IResponseDeserialiser.cs" />
     <Compile Include="Client\JsonResponseDeserialiser.cs" />
+    <Compile Include="Client\RequestContext.cs" />
     <Compile Include="ExecutionResult.cs" />
     <Compile Include="Helpers\ConcurrencyExtensions.cs" />
     <Compile Include="Helpers\DefaultValues.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="RestRequest.cs" />
     <Compile Include="RestRequestSetupExtensions.cs" />
     <Compile Include="RestResponse.cs" />
+    <Compile Include="RestResponseWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

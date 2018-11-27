@@ -7,10 +7,48 @@ using RestFluencing.Helpers;
 
 namespace RestFluencing
 {
+	public interface IRestResponse
+	{
+		/// <summary>
+		///     Adds a rule to be asserted. If <code>AutoAssertWhenAddingRule</code> is <code>true</code> then will also assert the new rule.
+		/// </summary>
+		/// <param name="rule"></param>
+		void AddRule(AssertionRule rule);
+
+		/// <summary>
+		///     Removes all previous rules of same type and adds the new rule.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="rule"></param>
+		void OnlyOneRuleOf<T>(T rule) where T : AssertionRule;
+
+		/// <summary>
+		///     Gives the results of the assertion rules against the assertion context (response).
+		/// </summary>
+		/// <returns></returns>
+		/// <remarks>
+		///     This is essential when using the DelayAssertion = true
+		/// </remarks>
+		ExecutionResult Execute();
+
+		/// <summary>
+		///     This will assert all of the rules and expect that there will be no failure from their execution.
+		/// </summary>
+		/// <remarks>
+		///     This is essential when using the DelayAssertion = true
+		/// </remarks>
+		void Assert();
+
+		/// <summary>
+		///		This will execute all the rules and expect that it will have at least one failure from the assertion rules.
+		/// </summary>
+		void AssertFailure();
+	}
+
 	/// <summary>
 	/// Response object that allows adding assertion rules so they can be validated against the original Request response.
 	/// </summary>
-	public class RestResponse
+	public class RestResponse : IRestResponse
 	{
 		private readonly IList<AssertionRule> _rules = new List<AssertionRule>();
 
@@ -23,7 +61,7 @@ namespace RestFluencing
 		public RestResponse(RestRequest request, AssertionContext context, bool autoAssertWhenAddingRule)
 		{
 			Request = request ?? throw new ArgumentNullException(nameof(request), "No RestRequest has been provided.");
-			Context = context ?? throw new ArgumentException(nameof(context), "No AssertionContext has been provided.");
+			Context = context ?? throw new ArgumentNullException(nameof(context), "No AssertionContext has been provided.");
 			AutoAssertWhenAddingRule = autoAssertWhenAddingRule;
 		}
 

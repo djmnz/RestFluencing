@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RestFluencing.Tests.Clients;
-using RestFluencing.Tests.Models;
 using RestFluencing;
 using RestFluencing.Assertion;
+using RestFluencing.Assertion.Rules;
 using RestFluencing.JsonSchema;
 
 namespace RestFluencing.Tests
@@ -19,15 +19,8 @@ namespace RestFluencing.Tests
 		[TestInitialize]
 		public void Setup()
 		{
-			// Setup Defaults
-			var restDefaults = RestConfiguration.JsonDefault();
-			restDefaults.WithBaseUrl("http://test.starnow.local/");
-			_configuration = restDefaults;
-
-			// Setup Factory
-			var factory = Factories.Default();
-			restDefaults.ClientFactory = factory;
-			_factory = factory as TestApiFactory;
+			_configuration = RestConfigurationHelper.Default();
+			_factory = _configuration.ClientFactory as TestApiFactory;
 		}
 
 		[TestMethod]
@@ -94,5 +87,4 @@ namespace RestFluencing.Tests
 				.ShouldFail();
 		}
 	}
-
 }

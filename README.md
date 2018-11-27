@@ -12,6 +12,8 @@ RestFluencing API is stable and functional, low chance of introducing breaking c
 
 Looking for community feedback for closing version the version 0.x as 1.0.
 
+![Build Status](https://ci.appveyor.com/api/projects/status/github/djmnz/restfluencing?branch=master&svg=true)
+
 
 # Getting started
 
@@ -152,7 +154,104 @@ _configuration.Get("/users/defunkt")
 	.Assert();
 ```
 
+## Asserting Using Custom Function
 
+**Model:**
+``` C#
+public class GitHubUser
+{
+	public int id { get; set; }
+	public string login { get; set; }
+}
+```
+
+**Test:**
+
+``` C#
+_configuration.Get("/users/defunkt")
+	.Response()
+	.ReturnsModel<GitHubUser>(c => {c.login == "defunkt")
+	.ReturnsModel<GitHubUser>(c => c.id == 2)
+	.Assert();
+```
+
+## Getting the response deserialized object
+
+We are not a Rest client, but an assertion framework. However we understand that in certain circumstances that there may be a need to retrieve the object to be used by the next test.
+
+Below is an example of how you can leverage the custom function assertion to do so.
+
+**Model:**
+``` C#
+public class GitHubUser
+{
+	public int id { get; set; }
+	public string login { get; set; }
+}
+```
+
+**Test:**
+
+``` C#
+
+GitHubUserModel user = null;
+Rest.GetFromUrl("https://api.github.com/users/defunkt")
+	.WithHeader("User-Agent", "RestFluencing Sample")
+	.Response()
+	.ReturnsModel<GitHubUserModel>(model =>
+	{
+		user = model;
+		return true;
+	}, string.Empty)
+	.Assert();
+
+Assert.IsNotNull(user);
+
+```
+
+## Intercepting Request before submitted to client
+
+``` C#
+
+// Arrange
+bool callFromConfig = false;
+var config = RestConfigurationHelper.Default();
+config.BeforeRequest(context => { callFromConfig = true; });
+
+// Act
+config.Get("/null").Response().Assert();
+
+// Assert
+Assert.IsTrue(callFromConfig);
+
+```
+
+
+## Intercepting Response before it is Asserted
+
+*Note*: If need the deserialize the response to a model, see the example above for `ReturnsModel`.
+
+``` C#
+string contentFromConfig = null;
+string contentFromRequest = null;
+// Arrange
+var config = RestConfigurationHelper.Default()
+	.AfterRequest(context => { contentFromConfig = context.Response.Content; });
+
+var request = config.Get("/product/apple")
+	.AfterRequest(context => { contentFromRequest = context.Response.Content; });
+
+// Act
+request.Response().Assert();
+
+// Assert
+Assert.IsNotNull(contentFromConfig);
+Assert.IsNotNull(contentFromRequest);
+
+Assert.IsTrue(contentFromConfig.Contains("Apple"));
+Assert.IsTrue(contentFromRequest.Contains("Apple"));
+
+```
 
 ## Asserting Header
 

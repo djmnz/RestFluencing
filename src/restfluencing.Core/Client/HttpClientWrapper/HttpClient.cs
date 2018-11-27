@@ -61,7 +61,7 @@ namespace RestFluencing.Client.HttpApiClient
 				{
 					result.Status = (int) response.StatusCode;
 					result.StatusCode = (HttpStatusCode) (int) response.StatusCode;
-					result.Headers = CreateHeaders(response.Content.Headers);
+					result.Headers = CreateHeaders(response.Headers);
 					result.Content = response.Content.ReadAsStringAsync().GetSyncResult();
 					return result;
 				}
@@ -75,13 +75,13 @@ namespace RestFluencing.Client.HttpApiClient
 		{
 		}
 
-		private IDictionary<string, IEnumerable<string>> CreateHeaders(HttpContentHeaders responseHeaders)
+		private IDictionary<string, IEnumerable<string>> CreateHeaders(HttpHeaders responseHeaders)
 		{
 			var result = new Dictionary<string, IEnumerable<string>>();
 			
 			foreach (var h in responseHeaders)
 			{
-				result.Add(h.Key,h.Value);
+				result.Add(h.Key, h.Value);
 			}
 
 			return result;

@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RestFluencing.Assertion;
 
 namespace RestFluencing.Sample.GitHub
@@ -15,7 +16,10 @@ namespace RestFluencing.Sample.GitHub
 			_configuration.WithHeader("User-Agent", "RestFluencing Sample");
 			_configuration.WithBaseUrl("https://api.github.com/");
 			_configuration.WithBasicAuthorization("<username>", "<password>");
+			ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 		}
+
+
 
 		[TestMethod]
 		public void GetAuthenticatedValue()
@@ -38,7 +42,7 @@ namespace RestFluencing.Sample.GitHub
 				})
 				.Response()
 				.ReturnsStatus(HttpStatusCode.OK)
-				.ReturnsDynamic(r => r.subscribed == true, "Expected subsribed to be true")
+				.ReturnsDynamic(r => r.subscribed == true, "Expected subscribed to be true")
 				.Assert();
 		}
 

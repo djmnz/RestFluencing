@@ -8,6 +8,18 @@ using RestFluencing.Helpers;
 namespace RestFluencing
 {
 	/// <summary>
+	///	   Delegate to execute before the request is executed
+	/// </summary>
+	/// <param name="context"></param>
+	public delegate void BeforeRequestDelegate(RequestContext context);
+
+	/// <summary>
+	///		Delegate to execute after the request is sent
+	/// </summary>
+	/// <param name="context"></param>
+	public delegate void AfterRequestDelegate(AssertionContext context);
+
+	/// <summary>
 	///     Base configuration of the requests and clients
 	/// </summary>
 	/// <remarks>
@@ -39,6 +51,18 @@ namespace RestFluencing
 		///     How the assertion results should be handled.
 		/// </summary>
 		public IAssertion Assertion { get; set; } = new ExceptionAssertion();
+
+		/// <summary>
+		/// Events raised before the request is submitted by the client
+		/// </summary>
+		internal BeforeRequestDelegate BeforeRequestEvent { get; set; }
+
+		/// <summary>
+		/// Events raised after the request is submitted by the client
+		/// </summary>
+		internal AfterRequestDelegate AfterRequestEvent { get; set; }
+
+
 
 		/// <summary>
 		///     Overrides the base URL
