@@ -2,8 +2,8 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("0.9.1.0")]
-[assembly: AssemblyFileVersion("0.9.1.0")]
+[assembly: AssemblyVersion("0.9.2.0")]
+[assembly: AssemblyFileVersion("0.9.2.0")]
 
 [assembly: AssemblyTitle("RestFluencing")]
 [assembly: AssemblyDescription("Framework to help testing Restful APIs in a fluent style that are easy to write and understand. Compatible with NUnit, MSTest, XUnit and any test runner.")]
