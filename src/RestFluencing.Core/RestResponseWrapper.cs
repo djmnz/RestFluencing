@@ -10,31 +10,40 @@ namespace RestFluencing
 	{
 		private readonly IRestResponse _response;
 
+        /// <summary>
+        /// The response to be wrapped
+        /// </summary>
+        /// <param name="response"></param>
 		public RestResponseWrapper(IRestResponse response)
 		{
 			_response = response ?? throw new ArgumentNullException(nameof(response), "No Response provided to wrap.");
 		}
 
+        /// <inheritdoc/>
 		public void AddRule(AssertionRule rule)
 		{
 			_response.AddRule(rule);
 		}
 
+        /// <inheritdoc/>
 		public void OnlyOneRuleOf<T>(T rule) where T : AssertionRule
 		{
 			_response.OnlyOneRuleOf(rule);
 		}
 
+        /// <inheritdoc/>
 		public ExecutionResult Execute()
 		{
 			return _response.Execute();
 		}
 
+        /// <inheritdoc/>
 		public void Assert()
 		{
 			_response.Assert();
 		}
 
+        /// <inheritdoc/>
 		public void AssertFailure()
 		{
 			_response.AssertFailure();
@@ -50,6 +59,7 @@ namespace RestFluencing
 	/// </remarks>
 	public class RestResponseOfModel<T> : RestResponseWrapper
 	{
+        /// <inheritdoc/>
 		public RestResponseOfModel(IRestResponse response) : base(response)
 		{
 			

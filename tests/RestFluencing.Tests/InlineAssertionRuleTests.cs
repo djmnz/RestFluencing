@@ -21,7 +21,6 @@ namespace RestFluencing.Tests
 		[TestMethod]
 		public void WhenBlankShouldFailAssertion()
 		{
-			var x = "";
 			Rest.Get("/product/apple", _configuration)
 				.Response()
 				.Execute()

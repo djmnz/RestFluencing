@@ -2,6 +2,9 @@
 
 namespace RestFluencing.Client
 {
+    /// <summary>
+    /// Extensions for the JsonResponseDeserialiser
+    /// </summary>
     public static class JsonResponseExtensions
     {
 

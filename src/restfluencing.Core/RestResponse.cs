@@ -7,6 +7,9 @@ using RestFluencing.Helpers;
 
 namespace RestFluencing
 {
+    /// <summary>
+    /// Represents the response and its assertion rules.
+    /// </summary>
 	public interface IRestResponse
 	{
 		/// <summary>
