@@ -1,4 +1,7 @@
-﻿install:
+version: 1.0.{build}
+image: Visual Studio 2017
+configuration: Release
+install:
   - choco install gitversion.portable -pre -y
 
 assembly_info:
@@ -6,12 +9,22 @@ assembly_info:
 
 before_build:
   - nuget restore
+
+before_build:
+  - cmd: nuget restore
   - ps: gitversion /l console /output buildserver /updateAssemblyInfo
 
 build:
-  project: <your sln file>
+  project: restfluencing.sln
+  publish_nuget: true
+  verbosity: minimal
 
 after_build:
   - cmd: ECHO nuget pack <Project>\<NuSpec>.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
   - cmd: nuget pack <Project>\<NuSpec>.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
   - cmd: appveyor PushArtifact "<NuSpec>.%GitVersion_NuGetVersion%.nupkg"
+test:
+  assemblies:
+    only:
+    - RestFluencing.Tests.dll
+
