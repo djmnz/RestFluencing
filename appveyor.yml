@@ -26,9 +26,9 @@ build:
   verbosity: minimal
 
 after_build:
-  - cmd: ECHO nuget pack <Project>\<NuSpec>.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
-  - cmd: nuget pack <Project>\<NuSpec>.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
-  - cmd: appveyor PushArtifact "<NuSpec>.%GitVersion_NuGetVersion%.nupkg"
+  - cmd: ECHO nuget pack .\src\RestFluencing.Core\restfluencing.Core.csproj -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  - cmd: nuget pack .\src\RestFluencing.Core\restfluencing.Core.csproj -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  - cmd: appveyor PushArtifact "RestFluencing.Core.%GitVersion_NuGetVersion%.nupkg"
 test:
   assemblies:
     only:
