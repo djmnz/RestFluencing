@@ -1,0 +1,13 @@
+version: 0.9.{build}
+image: Visual Studio 2017
+configuration: Release
+before_build:
+- cmd: nuget restore
+build:
+  project: restfluencing.sln
+  publish_nuget: true
+  verbosity: minimal
+test:
+  assemblies:
+    only:
+    - RestFluencing.Tests.dll
