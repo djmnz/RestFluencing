@@ -4,6 +4,15 @@ configuration: Release
 install:
   - choco install gitversion.portable -pre -y
 
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
+
 assembly_info:
   patch: false
 
