@@ -12,6 +12,7 @@
     <PackageLicenseUrl>https://github.com/djmnz/RestFluencing/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/djmnz/RestFluencing/</PackageProjectUrl>
     <PackageIconUrl>https://github.com/djmnz/RestFluencing/raw/4bfb24d77ac491348eb4165c9343fa90aef22a27/images/icon-testing-automation.png</PackageIconUrl>
+    <RootNamespace>RestFluencing</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

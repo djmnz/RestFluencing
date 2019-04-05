@@ -38,7 +38,25 @@ namespace RestFluencing
 
 			if (config.BaseUrl == null)
 			{
-				throw new ArgumentException(ErrorMessages.BaseUrlIsNotSet, "relative");
+				throw new ArgumentException(ErrorMessages.BaseUrlIsNotSet, nameof(relativeUrl));
+			}
+
+			return Rest.Post(relativeUrl, config);
+		}
+
+		/// <summary>
+		/// Prepare a PATCH request to the URL. You must have set the property <see cref="RestConfiguration.BaseUrl"/> of the configuration
+		/// </summary>
+		public static RestRequest Patch(this RestConfiguration config, string relativeUrl)
+		{
+			if (config == null)
+			{
+				throw new ArgumentNullException(nameof(config), ErrorMessages.NoConfiguration);
+			}
+
+			if (config.BaseUrl == null)
+			{
+				throw new ArgumentException(ErrorMessages.BaseUrlIsNotSet, nameof(relativeUrl));
 			}
 
 			return Rest.Post(relativeUrl, config);
@@ -56,7 +74,7 @@ namespace RestFluencing
 
 			if (config.BaseUrl == null)
 			{
-				throw new ArgumentException(ErrorMessages.BaseUrlIsNotSet, "relative");
+				throw new ArgumentException(ErrorMessages.BaseUrlIsNotSet, nameof(relativeUrl));
 			}
 
 			return Rest.Put(relativeUrl, config);
@@ -74,17 +92,18 @@ namespace RestFluencing
 
 			if (config.BaseUrl == null)
 			{
-				throw new ArgumentException(ErrorMessages.BaseUrlIsNotSet, "relative");
+				throw new ArgumentException(ErrorMessages.BaseUrlIsNotSet, nameof(relativeUrl));
 			}
 
 			return Rest.Delete(relativeUrl, config);
 		}
 
+
 		/// <summary>
 		/// Prepare a request for assertion.
 		/// </summary>
 		/// <returns></returns>
-		public static RestRequest Prepare(this RestConfiguration config, HttpVerb verb, string relative)
+		public static RestRequest Prepare(this RestConfiguration config, HttpVerb verb, string relativeUrl)
 		{
 			if (config == null)
 			{
@@ -93,10 +112,10 @@ namespace RestFluencing
 
 			if (config.BaseUrl == null)
 			{
-				throw new ArgumentException(ErrorMessages.BaseUrlIsNotSet, "relative");
+				throw new ArgumentException(ErrorMessages.BaseUrlIsNotSet, nameof(relativeUrl));
 			}
 
-			return Rest.PrepareToUrl(verb, new Uri(config.BaseUrl, relative), config);
+			return Rest.PrepareToUrl(verb, new Uri(config.BaseUrl, relativeUrl), config);
 		}
 
 	}

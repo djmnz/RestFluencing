@@ -1,3 +1,4 @@
+using System.Net.Http;
 using Newtonsoft.Json.Linq;
 
 namespace RestFluencing.Client.HttpApiClient
@@ -14,7 +15,23 @@ namespace RestFluencing.Client.HttpApiClient
 		/// <returns></returns>
 		public static RestConfiguration UsingWebApiClient(this RestConfiguration config)
 		{
+			// TODO write tests
 			config.ClientFactory = new HttpApiClientBuilder();
+			return config;
+		}
+
+
+		/// <summary>
+		/// Always uses the same http client.
+		/// Important: you need to manage the lifetime of the client instance.
+		/// </summary>
+		/// <param name="config">Configuration to apply to</param>
+		/// <param name="client">Client to be reused. You manage the lifetime of the instance</param>
+		/// <returns></returns>
+		public static RestConfiguration UsingWebApiClient(this RestConfiguration config, HttpClient client)
+		{
+			// TODO write tests
+			config.ClientFactory = new ReUseHttpApiClientBuilder(client);
 			return config;
 		}
 	}

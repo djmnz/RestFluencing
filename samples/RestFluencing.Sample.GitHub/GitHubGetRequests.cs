@@ -26,6 +26,16 @@ namespace RestFluencing.Sample.GitHub
 		}
 
 		[TestMethod]
+		public void SimpleGetRequestNotFound()
+		{
+			Rest.GetFromUrl("https://api.github.com/XXusers/XXXXXXdefunkt")
+				.WithHeader("User-Agent", "RestFluencing Sample")
+				.Response()
+				.ReturnsStatus(HttpStatusCode.NotFound)
+				.Assert();
+		}
+
+		[TestMethod]
 		public void GetTheModelToPassItOn()
 		{
 			GitHubUserModel user = null;
