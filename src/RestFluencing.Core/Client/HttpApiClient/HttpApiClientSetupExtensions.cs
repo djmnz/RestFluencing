@@ -15,7 +15,6 @@ namespace RestFluencing.Client.HttpApiClient
 		/// <returns></returns>
 		public static RestConfiguration UsingWebApiClient(this RestConfiguration config)
 		{
-			// TODO write tests
 			config.ClientFactory = new HttpApiClientBuilder();
 			return config;
 		}

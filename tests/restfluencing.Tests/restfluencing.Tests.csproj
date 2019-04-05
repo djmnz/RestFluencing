@@ -59,6 +59,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
@@ -79,6 +80,7 @@
   <ItemGroup>
     <Compile Include="AfterEventsOnRequestTests.cs" />
     <Compile Include="BeforeEventsOnRequestTests.cs" />
+    <Compile Include="HttpApiClientBuilderTests.cs" />
     <Compile Include="Clients\TestApiClient.cs" />
     <Compile Include="Clients\TestApiFactory.cs" />
     <Compile Include="ExpressionAssertionRule.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="ResponseAssertTests.cs" />
     <Compile Include="RestConfigurationHelper.cs" />
     <Compile Include="RestResponseWrapper.cs" />
+    <Compile Include="ReusableHttpClientBuilderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\restfluencing.Core\RestFluencing.Core.csproj">

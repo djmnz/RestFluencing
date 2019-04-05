@@ -2,11 +2,18 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+    <PackageId>RestFluencing.JsonSchema</PackageId>
+    <Version>1.0.0</Version>
     <Authors>djmnz</Authors>
+    <Company />
+    <Product>RestFluencing</Product>
+    <PackageTags>rest test fluent api framework http testing validation integration schema model</PackageTags>
     <Copyright>Copyright 2019 djmnz</Copyright>
     <PackageLicenseUrl>https://github.com/djmnz/RestFluencing/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/djmnz/RestFluencing/</PackageProjectUrl>
     <PackageIconUrl>https://github.com/djmnz/RestFluencing/raw/4bfb24d77ac491348eb4165c9343fa90aef22a27/images/icon-testing-automation.png</PackageIconUrl>
+    <RootNamespace>RestFluencing.JsonSchema</RootNamespace>
+    <Description>Package to help using Newton JsonSchema package to validate response models from an Integration test using RestFluencing.</Description>
   </PropertyGroup>
 
   <ItemGroup>
