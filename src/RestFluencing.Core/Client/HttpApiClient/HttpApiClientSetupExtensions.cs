@@ -1,3 +1,4 @@
+using System.Net.Http;
 using Newtonsoft.Json.Linq;
 
 namespace RestFluencing.Client.HttpApiClient
@@ -18,15 +19,18 @@ namespace RestFluencing.Client.HttpApiClient
 			return config;
 		}
 
+
 		/// <summary>
-		/// Uses the JsonResponseDeserialiser to process the response.
+		/// Always uses the same http client.
+		/// Important: you need to manage the lifetime of the client instance.
 		/// </summary>
 		/// <param name="config">Configuration to apply to</param>
-		/// <param name="loadSettings">Deserialiser settings to use (null for default)</param>
+		/// <param name="client">Client to be reused. You manage the lifetime of the instance</param>
 		/// <returns></returns>
-		public static RestConfiguration UseJsonResponseDeserialiser(this RestConfiguration config, JsonLoadSettings loadSettings = null)
+		public static RestConfiguration UsingWebApiClient(this RestConfiguration config, HttpClient client)
 		{
-			config.ResponseDeserialiser = new JsonResponseDeserialiser(loadSettings);
+			// TODO write tests
+			config.ClientFactory = new ReUseHttpApiClientBuilder(client);
 			return config;
 		}
 	}

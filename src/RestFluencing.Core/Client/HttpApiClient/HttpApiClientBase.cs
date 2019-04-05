@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -12,7 +11,7 @@ namespace RestFluencing.Client.HttpApiClient
 	/// <summary>
 	/// Standard API client that wraps the .Net HttpClient
 	/// </summary>
-	public class HttpApiClient : IApiClient
+	public abstract class HttpApiClientBase : IApiClient
 	{
 
 		/// <summary>
@@ -22,11 +21,13 @@ namespace RestFluencing.Client.HttpApiClient
 		/// <returns></returns>
 		public IApiClientResponse ExecuteRequest(IApiClientRequest request)
 		{
-			using (HttpClient client = new HttpClient())
+			IApiClientResponse result = new ApiClientResponse();
+			try
 			{
-				IApiClientResponse result = new ApiClientResponse();
+				HttpClient client = CreateClient();
 
-				var httpRequest = new HttpRequestMessage(new HttpMethod(request.Verb.ToString().ToUpper()), request.Uri);
+				var httpRequest = CreateHttpRequest(request);
+
 				const string contentTypeHeader = "content-type";
 				string contentType = null;
 
@@ -35,10 +36,11 @@ namespace RestFluencing.Client.HttpApiClient
 					//because the api keeps overriding the content type we have to find what we defined before
 					IList<string> values;
 					if (h.Key.Equals(contentTypeHeader, StringComparison.InvariantCultureIgnoreCase)
-						&& request.Headers.TryGetValue(h.Key, out values))
+					    && request.Headers.TryGetValue(h.Key, out values))
 					{
 						contentType = values.First();
 					}
+
 					httpRequest.Headers.TryAddWithoutValidation(h.Key, h.Value);
 				}
 
@@ -54,19 +56,46 @@ namespace RestFluencing.Client.HttpApiClient
 					}
 				}
 
-				// Set the timeout just prior to making the request to reduce the risk of unintended overrides (TODO make the HttpClient a singleton)
+				// Set the timeout just prior to making the request to reduce the risk of unintended overrides
 				client.Timeout = TimeSpan.FromSeconds(request.TimeoutInSeconds);
 
 				using (HttpResponseMessage response = client.SendAsync(httpRequest).GetSyncResult())
 				{
 					result.Status = (int) response.StatusCode;
 					result.StatusCode = (HttpStatusCode) (int) response.StatusCode;
-					result.Headers = CreateHeaders(response.Headers);
+					result.Headers = CreateHeaders(response.Headers, response.Content.Headers);
 					result.Content = response.Content.ReadAsStringAsync().GetSyncResult();
 					return result;
 				}
+
 			}
+			finally
+			{
+				DisposeClient();
+			}
+
+
 		}
+
+		/// <summary>
+		/// Creates the HttpRequestMessage from the IApiClientRequest
+		/// </summary>
+		/// <param name="request"></param>
+		/// <returns></returns>
+		protected virtual HttpRequestMessage CreateHttpRequest(IApiClientRequest request)
+		{
+			return new HttpRequestMessage(new HttpMethod(request.Verb.ToString().ToUpper()), request.Uri);
+		}
+
+		/// <summary>
+		/// Creates the client to be used. Override DisposeClient to customise the disposal.
+		/// </summary>
+		protected abstract HttpClient CreateClient();
+
+		/// <summary>
+		/// Disposes the client.
+		/// </summary>
+		protected abstract void DisposeClient();
 
 		/// <summary>
 		/// 
@@ -75,11 +104,19 @@ namespace RestFluencing.Client.HttpApiClient
 		{
 		}
 
-		private IDictionary<string, IEnumerable<string>> CreateHeaders(HttpHeaders responseHeaders)
+
+		private IDictionary<string, IEnumerable<string>> CreateHeaders(
+			HttpResponseHeaders responseHeaders,
+			HttpHeaders contentHeaders)
 		{
 			var result = new Dictionary<string, IEnumerable<string>>();
-			
+
 			foreach (var h in responseHeaders)
+			{
+				result.Add(h.Key, h.Value);
+			}
+
+			foreach (var h in contentHeaders)
 			{
 				result.Add(h.Key, h.Value);
 			}

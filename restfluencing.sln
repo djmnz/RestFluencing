@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{20456EFE-116
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1736C923-1A6A-4BFD-A1B9-ED886B9D3EF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestFluencing.Core", "src\RestFluencing.Core\RestFluencing.Core.csproj", "{BB44CC46-AAB8-4F0E-94FB-1A6B27EA3AAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestFluencing.Core", "src\RestFluencing.Core\RestFluencing.Core.csproj", "{BB44CC46-AAB8-4F0E-94FB-1A6B27EA3AAB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestFluencing.JsonSchema", "src\RestFluencing.JsonSchema\RestFluencing.JsonSchema.csproj", "{6FEE443F-DAF2-4726-885D-318A8ECDF7C1}"
 EndProject
