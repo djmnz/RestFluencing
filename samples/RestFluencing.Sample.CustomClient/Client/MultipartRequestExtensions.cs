@@ -26,7 +26,18 @@ namespace RestFluencing.Sample.CustomClient.Client
 				throw new InvalidOperationException("Need to use UsingMultipartApiClient to use multipart requests.");
 			}
 
-			content(multipart.MultipartContent);
+			request.BeforeRequest(context =>
+			{
+				MultipartFormClientRequest multipartBeforeRequest = context.Request as MultipartFormClientRequest;
+
+				if (multipartBeforeRequest is null)
+				{
+					throw new InvalidOperationException(
+						"Client factory changed, make sure you are UsingMultipartApiClient.");
+				}
+
+				content(multipartBeforeRequest.MultipartContent);
+			});
 
 			return request;
 		}

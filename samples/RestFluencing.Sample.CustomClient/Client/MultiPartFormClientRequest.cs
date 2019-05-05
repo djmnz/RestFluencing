@@ -5,6 +5,6 @@ namespace RestFluencing.Sample.CustomClient.Client
 {
     public class MultipartFormClientRequest : ApiClientRequest
     {
-        public MultipartFormDataContent MultipartContent { get; set; }
+        public MultipartFormDataContent MultipartContent { get; set; } = new MultipartFormDataContent();
     }
 }

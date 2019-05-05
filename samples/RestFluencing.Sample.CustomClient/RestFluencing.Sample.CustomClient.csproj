@@ -1,11 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netcoreapp2.0</TargetFramework>
 
-  <ItemGroup>
-    <ProjectReference Include="..\RestFluencing.Core\RestFluencing.Core.csproj" />
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
+		<PackageReference Include="xunit" Version="2.3.1" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+		<DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+		<ProjectReference Include="..\..\src\RestFluencing.Core\RestFluencing.Core.csproj" />
   </ItemGroup>
 
 </Project>
