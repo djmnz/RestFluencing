@@ -10,7 +10,10 @@ namespace RestFluencing.Client
 	{
 		internal RequestContext(AssertionContext context)
 		{
-			
+			Request = context.Request;
+			Client = context.Client;
+			ResponseDeserialiser = context.ResponseDeserialiser;
+			Properties = context.Properties;
 		}
 
 		/// <summary>

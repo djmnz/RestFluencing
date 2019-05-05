@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RestFluencing.Client;
 
 namespace RestFluencing.Tests
 {
@@ -85,6 +86,26 @@ namespace RestFluencing.Tests
 			Assert.IsTrue(firstCallFromConfig);
 			Assert.IsTrue(secondCallFromRequest);
 
+		}
+
+
+		[TestMethod]
+		public void BeforeRequest_RequestContext_ShouldHaveAllPropertiesSet()
+		{
+			// Arrange
+			RequestContext contextSent = null;
+			var config = RestConfigurationHelper.Default()
+				.BeforeRequest(context => { contextSent = context; } );
+
+			// Act
+			config.Get("/null").Response().Assert();
+
+			// Assert
+			Assert.IsNotNull(contextSent, "No RequestContext was sent through");
+			Assert.IsNotNull(contextSent.Client, "Should have a Client");
+			Assert.IsNotNull(contextSent.Request, "Should have a Request");
+			Assert.IsNotNull(contextSent.Properties, "Should have a Properties");
+			Assert.IsNotNull(contextSent.ResponseDeserialiser, "Should have a ResponseDeserialiser");
 		}
 
 	}
