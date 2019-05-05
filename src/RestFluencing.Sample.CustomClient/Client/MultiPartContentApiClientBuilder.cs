@@ -1,20 +1,21 @@
 using System.Net.Http;
+using RestFluencing.Client;
 
-namespace RestFluencing.Client.HttpApiClient
+namespace RestFluencing.Sample.CustomClient.Client
 {
 	/// <summary>
 	/// Standard http api client.
 	/// </summary>
-	public class MultiPartContentApiClientBuilder : IClientBuilder
+	public class MultipartContentApiClientBuilder : IClientBuilder
 	{
         private HttpClient _client;
 
-        public MultiPartContentApiClientBuilder() : this(null)
+        public MultipartContentApiClientBuilder() : this(null)
         {
             
         }
 
-        public MultiPartContentApiClientBuilder(HttpClient reuseHttpClient)
+        public MultipartContentApiClientBuilder(HttpClient reuseHttpClient)
         {
             _client = reuseHttpClient;
         }
@@ -25,7 +26,7 @@ namespace RestFluencing.Client.HttpApiClient
 		/// <returns></returns>
 		public IApiClient Create()
 		{
-			return new MultiPartContentApiClient(_client);
+			return new MultipartContentApiClient(_client);
 		}
 
 		/// <summary>
@@ -34,7 +35,7 @@ namespace RestFluencing.Client.HttpApiClient
 		/// <returns></returns>
 		public IApiClientRequest CreateRequest()
 		{
-			return new MultipartFormDataRequest();
+			return new MultipartFormClientRequest();
 		}
 	}
 }

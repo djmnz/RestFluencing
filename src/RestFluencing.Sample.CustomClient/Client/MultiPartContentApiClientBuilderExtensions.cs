@@ -1,12 +1,11 @@
 using System.Net.Http;
-using Newtonsoft.Json.Linq;
 
-namespace RestFluencing.Client.HttpApiClient
+namespace RestFluencing.Sample.CustomClient.Client
 {
 	/// <summary>
 	/// Extensions to help configure the RestConfiguration to use the standard HttpApiClient factory.
 	/// </summary>
-	public static class MultiPartContentApiClientBuilderExtensions
+	public static class MultipartContentApiClientBuilderExtensions
     {
 		/// <summary>
 		/// Uses the standard HttpApiClient wrapper as the web client
@@ -15,7 +14,7 @@ namespace RestFluencing.Client.HttpApiClient
 		/// <returns></returns>
 		public static RestConfiguration UsingMultipartApiClient(this RestConfiguration config)
 		{
-			config.ClientFactory = new MultiPartContentApiClientBuilder();
+			config.ClientFactory = new MultipartContentApiClientBuilder();
 			return config;
 		}
 
@@ -29,7 +28,7 @@ namespace RestFluencing.Client.HttpApiClient
 		/// <returns></returns>
 		public static RestConfiguration UsingMultipartApiClient(this RestConfiguration config, HttpClient client)
 		{
-			config.ClientFactory = new MultiPartContentApiClientBuilder(client);
+			config.ClientFactory = new MultipartContentApiClientBuilder(client);
 			return config;
 		}
 	}

@@ -4,18 +4,19 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using RestFluencing.Client;
 
-namespace RestFluencing.Client.HttpApiClient
+namespace RestFluencing.Sample.CustomClient.Client
 {
     /// <summary>
     /// Standard http client that creates a new instance every request.
     /// </summary>
-	public class MultiPartContentApiClient : IApiClient
+	public class MultipartContentApiClient : IApiClient
     {
         private readonly HttpClient _reuseClient;
         private HttpClient _disposableClient;
 
-        public MultiPartContentApiClient(HttpClient reuseClient)
+        public MultipartContentApiClient(HttpClient reuseClient)
         {
             _reuseClient = reuseClient;
         }
@@ -50,7 +51,7 @@ namespace RestFluencing.Client.HttpApiClient
                     httpRequest.Headers.TryAddWithoutValidation(h.Key, h.Value);
                 }
                 
-                var multiPartContent = request as MultipartFormDataRequest;
+                var multiPartContent = request as MultipartFormClientRequest;
                 if (multiPartContent is null) // default string content behaviour
                 {
                     if (contentType != null)
