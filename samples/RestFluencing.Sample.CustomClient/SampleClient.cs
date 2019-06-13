@@ -9,7 +9,7 @@ namespace RestFluencing.Sample.CustomClient
 {
     public class SampleClient
     {
-		[Fact]
+		[Fact(Skip = "No mock for api (yet)")]
 	    public void Test()
 	    {
 			// Steps for creating a new client
