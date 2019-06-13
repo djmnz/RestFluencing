@@ -9,11 +9,10 @@ using RestFluencing.Helpers;
 namespace RestFluencing.Client.HttpApiClient
 {
 	/// <summary>
-	/// Standard API client that wraps the .Net HttpClient
+	/// Base client class to help extending the behaviour of the client that RestFluencing is to use.
 	/// </summary>
 	public abstract class HttpApiClientBase : IApiClient
 	{
-
 		/// <summary>
 		/// Executes the request and creates an response object
 		/// </summary>
@@ -28,43 +27,21 @@ namespace RestFluencing.Client.HttpApiClient
 
 				var httpRequest = CreateHttpRequest(request);
 
-				const string contentTypeHeader = "content-type";
-				string contentType = null;
+				PrepareRequestHeaders(request, httpRequest);
 
-				foreach (var h in request.Headers)
-				{
-					//because the api keeps overriding the content type we have to find what we defined before
-					IList<string> values;
-					if (h.Key.Equals(contentTypeHeader, StringComparison.InvariantCultureIgnoreCase)
-					    && request.Headers.TryGetValue(h.Key, out values))
-					{
-						contentType = values.First();
-					}
+				var contentType = GetContentTypeHeaderValue(request);
 
-					httpRequest.Headers.TryAddWithoutValidation(h.Key, h.Value);
-				}
-
-				if (request.Content != null)
-				{
-					if (contentType != null)
-					{
-						httpRequest.Content = new StringContent(request.Content, Encoding.UTF8, contentType);
-					}
-					else
-					{
-						httpRequest.Content = new StringContent(request.Content);
-					}
-				}
+				PrepareRequestContent(request, httpRequest, contentType);
 
 				// Set the timeout just prior to making the request to reduce the risk of unintended overrides
 				client.Timeout = TimeSpan.FromSeconds(request.TimeoutInSeconds);
 
-				using (HttpResponseMessage response = client.SendAsync(httpRequest).GetSyncResult())
+				using (HttpResponseMessage response = client.SendAsync(httpRequest).GetAwaiter().GetResult())
 				{
-					result.Status = (int) response.StatusCode;
-					result.StatusCode = (HttpStatusCode) (int) response.StatusCode;
+					result.Status = (int)response.StatusCode;
+					result.StatusCode = (HttpStatusCode)(int)response.StatusCode;
 					result.Headers = CreateHeaders(response.Headers, response.Content.Headers);
-					result.Content = response.Content.ReadAsStringAsync().GetSyncResult();
+					result.Content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 					return result;
 				}
 
@@ -73,7 +50,65 @@ namespace RestFluencing.Client.HttpApiClient
 			{
 				DisposeClient();
 			}
+		}
 
+		/// <summary>
+		/// Prepares the request content. By default, creates a string content with the provided contentType.
+		/// </summary>
+		/// <param name="request"></param>
+		/// <param name="httpRequest"></param>
+		/// <param name="contentType"></param>
+		protected virtual void PrepareRequestContent(IApiClientRequest request, HttpRequestMessage httpRequest,
+			string contentType)
+		{
+			if (request.Content != null)
+			{
+				if (contentType != null)
+				{
+					httpRequest.Content = new StringContent(request.Content, Encoding.UTF8, contentType);
+				}
+				else
+				{
+					httpRequest.Content = new StringContent(request.Content);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Prepares the header requests, copying from the RestFluencing Request to the HttpRequestMessage.
+		/// </summary>
+		/// <param name="request"></param>
+		/// <param name="httpRequest"></param>
+		protected virtual void PrepareRequestHeaders(IApiClientRequest request, HttpRequestMessage httpRequest)
+		{
+			foreach (var h in request.Headers)
+			{
+				httpRequest.Headers.TryAddWithoutValidation(h.Key, h.Value);
+			}
+		}
+
+		/// <summary>
+		/// Retrieves the Content Type header defined in the RestFluencing Request.
+		/// </summary>
+		/// <param name="request"></param>
+		/// <returns></returns>
+		protected virtual string GetContentTypeHeaderValue(IApiClientRequest request)
+		{
+			//because the api keeps overriding the content type we have to find what we defined before
+			const string contentTypeHeader = "content-type";
+			string contentType = null;
+
+			foreach (var h in request.Headers)
+			{
+				IList<string> values;
+				if (h.Key.Equals(contentTypeHeader, StringComparison.InvariantCultureIgnoreCase)
+					&& request.Headers.TryGetValue(h.Key, out values))
+				{
+					contentType = values.First();
+				}
+			}
+
+			return contentType;
 
 		}
 
@@ -96,7 +131,6 @@ namespace RestFluencing.Client.HttpApiClient
 		/// Disposes the client.
 		/// </summary>
 		protected abstract void DisposeClient();
-
 		/// <summary>
 		/// 
 		/// </summary>

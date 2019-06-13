@@ -404,3 +404,24 @@ _configuration.Put("/repos/djmnz/RestFluencing/subscription")
 	.Assert();
 ```
 
+
+## Multipart Content
+
+``` C#
+var config = 
+	new RestConfiguration()
+		.WithBaseUrl("http://localhost:8080/")
+		.UseJsonResponseDeserialiser()
+		.UsingMultipartApiClient();
+
+config.RequestDefaults.TimeoutInSeconds = 90;
+
+config.Post("/")
+
+	.WithMultipart(r => r.Add(new StringContent("value"), "key"))
+
+	.Response()
+	.ReturnsStatus(HttpStatusCode.OK);
+```
+
+Make sure you use `UsingMultipartApiClient()` **and** `WithMultipart()`
