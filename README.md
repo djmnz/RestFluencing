@@ -10,9 +10,9 @@ Currently used in the Integration Test environment at https://www.starnow.com/ t
 
 RestFluencing API is stable and functional, low chance of introducing breaking changes.
 
-Looking for community feedback for closing version the version 0.x as 1.0.
-
 ![Build Status](https://ci.appveyor.com/api/projects/status/github/djmnz/restfluencing?branch=master&svg=true)
+
+If you are using RestFluencing in your company, let us know if you would like your company link here.
 
 
 # Getting started
