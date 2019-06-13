@@ -1,21 +1,26 @@
 using System.Net.Http;
-using RestFluencing.Client;
 
-namespace RestFluencing.Sample.CustomClient.Client
+namespace RestFluencing.Client.MultipartApiClient
 {
 	/// <summary>
-	/// EXAMPLE
-	/// This is an example on how to create a generic api client builder for your custom client.
+	/// Standard http api client.
 	/// </summary>
 	public class MultipartContentApiClientBuilder : IClientBuilder
 	{
-        private HttpClient _client;
+        private readonly HttpClient _client;
 
+		/// <summary>
+		/// Builder with no reuse of client.
+		/// </summary>
         public MultipartContentApiClientBuilder() : this(null)
         {
             
         }
 
+		/// <summary>
+		/// Builder with a client to reuse.
+		/// </summary>
+		/// <param name="reuseHttpClient"></param>
         public MultipartContentApiClientBuilder(HttpClient reuseHttpClient)
         {
             _client = reuseHttpClient;

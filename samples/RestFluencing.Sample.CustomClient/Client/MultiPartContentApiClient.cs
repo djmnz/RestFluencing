@@ -9,7 +9,9 @@ using RestFluencing.Client;
 namespace RestFluencing.Sample.CustomClient.Client
 {
     /// <summary>
-    /// Standard http client that creates a new instance every request.
+    /// EXAMPLE
+    /// This example uses an old version of the HttpApiClient that was adjusted to produce the proof of concept for
+    /// a multipart client.
     /// </summary>
 	public class MultipartContentApiClient : IApiClient
     {

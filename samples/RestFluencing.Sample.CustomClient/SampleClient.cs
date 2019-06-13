@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using RestFluencing.Assertion;
 using RestFluencing.Client;
@@ -12,7 +12,15 @@ namespace RestFluencing.Sample.CustomClient
 		[Fact]
 	    public void Test()
 	    {
-		    var config = 
+			// Steps for creating a new client
+			//   1 - Create your client = MultipartContentApiClient
+		    //		Optional : override the HttpClientBase
+			//   2 - Create your builder = MultipartContentApiClientBuilder
+			//   3 - Create your extensions (those are helpers for ease of use - MultiPartContentApiClientBuilderExtensions and MultipartRequestExtensions)
+			//   Optional : create your own request type
+
+
+			var config = 
 			    new RestConfiguration()
 				    .WithBaseUrl("http://localhost:8080/")
 					.UseJsonResponseDeserialiser()
