@@ -59,7 +59,7 @@ namespace RestFluencing
 				throw new ArgumentException(ErrorMessages.BaseUrlIsNotSet, nameof(relativeUrl));
 			}
 
-			return Rest.Post(relativeUrl, config);
+			return Rest.Patch(relativeUrl, config);
 		}
 
 		/// <summary>
