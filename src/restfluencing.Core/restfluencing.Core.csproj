@@ -62,7 +62,7 @@ Compatible with NUnit, MSTest, XUnit and any test runner.</Description>
 
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 
 </Project>
